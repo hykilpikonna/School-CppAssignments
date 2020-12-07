@@ -7,9 +7,31 @@
 
 using namespace std;
 
+#define Board vector<Point>
+
+/*
+ * Design notes:
+ * 1. About using an array of points rather than a 2D grid:
+ *   An array of alive points is more optimized for large grids
+ *   because it doesn't have to check every single position on
+ *   the grid when it updates. (A Board is a vector<Point>)
+ */
+
+/**
+ * 2D Point class
+ */
+class Point
+{
+public:
+    int x, y;
+    Point(): Point(0, 0) {}
+    Point(int x, int y) : x(x), y(y) {}
+};
+
 // Procedural programming: Functions for steps in a program
 void startSim(int width, int height);
 void startChallenge();
+Board inputBoard();
 
 // Util functions
 int inputInt(const string& prompt = "");
