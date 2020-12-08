@@ -24,6 +24,6 @@ Long pointHash(Int x, Int y);
  * @param hash Long number
  * @return Position X and Y
  */
-tuple<Int, Int> pointUnhash(Long hash)
+tuple<Int, Int> pointUnhash(Long hash);
 
 #endif //HOMEWORKS_CONWAY_UTILS_H
