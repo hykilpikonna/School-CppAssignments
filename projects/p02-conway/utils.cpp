@@ -52,3 +52,10 @@ bool shouldSurvive(bool currentAlive, Int aliveNeighbors)
 
     return false;
 }
+
+String repeat(const String &str, Int times)
+{
+    String s;
+    for (var i = 0; i < times; i++) s += str;
+    return s;
+}

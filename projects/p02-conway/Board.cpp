@@ -73,9 +73,7 @@ void Board::_inputAliveLoc(Int xStart, Int yStart, Int xEnd, Int yEnd)
 void Board::print()
 {
     // Output border row
-    cout << borderColor;
-    for (Int col = 0; col < w + 1; col++) cout << "  ";
-    cout << reset << endl;
+    cout << borderColor << repeat("  ", w + 1) << reset << endl;
 
     // Loop through all elements
     for (Int row = 0; row < h; row++)
@@ -113,9 +111,7 @@ void Board::print()
     }
 
     // Output border row
-    cout << borderColor;
-    for (Int col = 0; col < w + 1; col++) cout << "  ";
-    cout << reset << endl;
+    cout << borderColor << repeat("  ", w + 1) << reset << endl;
 }
 
 bool Board::isAlive(Int x, Int y)

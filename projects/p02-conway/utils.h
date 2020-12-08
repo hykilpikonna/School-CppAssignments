@@ -50,4 +50,13 @@ int inputInt(const string& prompt = "");
  */
 bool shouldSurvive(bool currentAlive, Int aliveNeighbors);
 
+/**
+ * Repeat a string how many times
+ *
+ * @param str String
+ * @param times How many times
+ * @return Repeated string
+ */
+String repeat(const String &str, Int times);
+
 #endif //HOMEWORKS_CONWAY_UTILS_H
