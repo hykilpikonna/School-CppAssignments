@@ -20,13 +20,13 @@ int main(int argc, char* argv[])
     // Prompt
     cout << "Welcome to Hykilp's implementation of Conway's Game of Life!\n\n"
             "Launch options:\n"
-            "1: Start simulation.\n"
-            "2: Try my challenge!\n";
+            "0: Start simulation.\n"
+            "1: Try my challenge!\n";
 
     switch (inputInt())
     {
-        case 1: startSim(); break;
-        case 2: startChallenge(); break;
+        case 0: startSim(); break;
+        case 1: startChallenge(); break;
         default: cout << "What?" << endl; break;
     }
 
@@ -101,15 +101,15 @@ void startChallenge()
         cout << "\033[2J\033[H\nPress Ctrl+C to quit..." << endl;
         coins += board.tickWithCoins();
         board.print();
-        cout << yellow << "You have " << coins << " coins!";
+        cout << yellow << "You have " << coins << " coins!" << reset << endl;
 
         // Win! \(^o^)/~
         if (coins >= 50 * 50 - 16 * 16)
         {
-            cout << yellow << "Yay! You've got all the points!" << endl;
+            cout << yellow << "Yay! You've got all the points!" << reset << endl;
             break;
         }
-        
+
         if (board.alive.empty()) break;
     }
 }
