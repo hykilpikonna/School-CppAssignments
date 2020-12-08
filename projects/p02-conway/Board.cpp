@@ -6,24 +6,68 @@
 
 void Board::input(char aliveChar)
 {
-    cout << "Please input the board matrix (use " << aliveChar << " to indicate cells alive): " << endl;
+    input(0, 0, w, h, aliveChar);
+}
 
-    // Every row
-    for (int row = 0; row < h; row++)
+void Board::input(Int xStart, Int yStart, Int xEnd, Int yEnd, char aliveChar)
+{
+    // Ask user which input method to use
+    val option = inputInt("Select your input method:\n"
+                          "0. Input matrix\n"
+                          "1. Input alive cells\n"
+                          "> ");
+
+    switch (option)
     {
-        // Every char in a line
-        String line = inputLine();
-        for (int col = 0; col < min(Int(line.length()), w); col++)
-        {
-            // Found alive cell
-            if (line[col] == aliveChar) alive.emplace_back(pointHash(row, col));
-        }
+        case 0: _inputMatrix(xStart, yStart, xEnd, yEnd, aliveChar); break;
+        case 1: _inputAliveLoc(xStart, yStart, xEnd, yEnd); break;
+        default: cout << "What?" << endl; break;
     }
 
     // Sort new alive list
     sort(alive.begin(), alive.end());
 
     cout << "Input received!" << endl;
+}
+
+void Board::_inputMatrix(Int xStart, Int yStart, Int xEnd, Int yEnd, char aliveChar)
+{
+    cout << "Please input the board matrix (use " << aliveChar << " to indicate cells alive): " << endl;
+
+    // Every row
+    for (int row = yStart; row < yEnd; row++)
+    {
+        // Every char in a line
+        String line = inputLine();
+        for (int col = xStart; col < min(Int(line.length()), xEnd); col++)
+        {
+            // Found alive cell
+            if (line[col] == aliveChar) alive.emplace_back(pointHash(row, col));
+        }
+    }
+}
+
+void Board::_inputAliveLoc(Int xStart, Int yStart, Int xEnd, Int yEnd)
+{
+    while (true)
+    {
+        // Take and parse input
+        val s = inputLine("Input alive location in x,y format (or empty line to end): ");
+        if (s.empty()) break;
+        val i = s.find(',');
+        val x = stoi(s.substr(0, i));
+        val y = stoi(s.substr(i + 1));
+
+        // Validate input
+        if (x < xStart || x >= xEnd || y < yStart || y >= yEnd)
+        {
+            cout << "Please don't go out of range :(" << endl;
+            continue;
+        }
+
+        // Add input
+        alive.emplace_back(pointHash(x, y));
+    }
 }
 
 void Board::print()

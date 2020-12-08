@@ -32,6 +32,21 @@ public:
     void input(char aliveChar = '1');
 
     /**
+     * Asks the user to input the board
+     */
+    void input(Int xStart, Int yStart, Int xEnd, Int yEnd, char aliveChar = '1');
+
+    /**
+     * Asks the user to input initial alive locations
+     */
+    void _inputAliveLoc(Int xStart, Int yStart, Int xEnd, Int yEnd);
+
+    /**
+     * Asks the user to input a matrix
+     */
+    void _inputMatrix(Int xStart, Int yStart, Int xEnd, Int yEnd, char aliveChar = '1');
+
+    /**
      * Print the board
      */
     void print();
