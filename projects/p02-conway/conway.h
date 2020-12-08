@@ -35,6 +35,4 @@ void startSim(int width, int height);
 
 void startChallenge();
 
-Board inputBoard(int width, int height);
-
 #endif //HOMEWORKS_CONWAY_H

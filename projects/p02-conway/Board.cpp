@@ -3,3 +3,8 @@
 //
 
 #include "Board.h"
+
+void Board::input(bool)
+{
+
+}

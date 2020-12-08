@@ -25,6 +25,10 @@ public:
      */
     Board(Int w, Int h): w(w), h(h) {}
 
+    /**
+     * Asks the user to input the board
+     */
+    void input(bool custom = false);
 };
 
 #endif //HOMEWORKS_BOARD_H
