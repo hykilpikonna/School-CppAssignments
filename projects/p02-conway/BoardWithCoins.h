@@ -29,6 +29,9 @@ public:
      */
     bool isCoin(Int x, Int y);
 
+    /**
+     * Print with coins
+     */
     void print() override;
 };
 
