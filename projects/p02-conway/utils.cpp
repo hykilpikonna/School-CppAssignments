@@ -2,7 +2,7 @@
 // Created by Hykilpikonna on 12/7/20.
 //
 
-#include "conway-utils.h"
+#include "utils.h"
 
 Long pointHash(Int x, Int y)
 {

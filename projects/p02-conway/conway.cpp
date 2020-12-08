@@ -4,7 +4,7 @@
 
 // Custom macros
 #include "macros.h"
-#include "conway-utils.h"
+#include "utils.h"
 
 /*
  * Design notes:
