@@ -20,11 +20,12 @@ int main(int argc, char* argv[])
     // Prompt
     cout << "Welcome to Hykilp's implementation of Conway's Game of Life!\n\n"
             "Launch options:\n"
-            "0: Start simulation.\n"
-            "1: Try my challenge!\n";
+            "0: Configure."
+            "1: Start simulation.\n"
+            "2: Try my challenge!\n";
 
     // Simulation
-    if (inputInt() == 0)
+    if (inputInt() == 1)
     {
         val width = inputInt("Input your board width: ");
         val height = inputInt("Input your board height: ");
@@ -47,5 +48,11 @@ void runTests()
 
 void startSim(Board board)
 {
-
+    while (true)
+    {
+        cout << "Press any key to continue or Ctrl+C to break..." << endl;
+        cin.ignore();
+        board.tick();
+        board.print();
+    }
 }
