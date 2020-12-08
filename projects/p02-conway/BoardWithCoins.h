@@ -7,7 +7,7 @@
 
 #include "Board.h"
 
-class BoardWithCoins: Board
+class BoardWithCoins: public Board
 {
 public:
     List<Long> coins;
