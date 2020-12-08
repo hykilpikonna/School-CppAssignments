@@ -16,6 +16,7 @@ tuple<Int, Int> pointUnhash(Long hash)
 
 String inputLine(const String &prompt)
 {
+    cout << prompt;
     String input;
     getline(cin, input);
     return input;
@@ -23,7 +24,7 @@ String inputLine(const String &prompt)
 
 int inputInt(const String &prompt)
 {
-    auto input = inputLine(prompt);
+    val input = inputLine(prompt);
     if (input.empty()) return 0;
     return stoi(input);
 }
