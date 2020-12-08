@@ -23,11 +23,10 @@ public:
     /**
      * Get whether the cell at a position is a coin. (Assumes `coins` is sorted)
      *
-     * @param x Position X.
-     * @param y Position Y.
-     * @return Is coin or not.
+     * @param hash Point hash.
+     * @return Index of the coin or -1
      */
-    bool isCoin(Int x, Int y);
+    [[nodiscard]] int findCoin(Long hash) const;
 
     /**
      * Print with coins

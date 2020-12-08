@@ -4,11 +4,9 @@
 
 #include "BoardWithCoins.h"
 
-bool BoardWithCoins::isCoin(Int x, Int y)
+int BoardWithCoins::findCoin(Long hash) const
 {
-    if (x < 0 || x > w) return false;
-    if (y < 0 || y > h) return false;
-    return binary_search(coins.begin(), coins.end(), pointHash(x, y));
+    return binarySearchIndexOf(coins, hash);
 }
 
 void BoardWithCoins::print()
@@ -43,8 +41,8 @@ void BoardWithCoins::print()
                 }
             }
 
-            // Output spaces
-            cout << (isCoin(col, row) ? "()" : "  ");
+            // Output spaces or coins
+            cout << (findCoin(pointHash(col, row)) != -1 ? "()" : "  ");
         }
 
         // Reset color for the end
