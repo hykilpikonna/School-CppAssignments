@@ -79,15 +79,15 @@ void Board::print()
 
     // Output border row
     cout << borderColor;
-    for (int col = 0; col < w + 1; col++) cout << "  ";
+    for (Int col = 0; col < w + 1; col++) cout << "  ";
     cout << reset << endl;
 
     // Loop through all elements
-    for (int row = 0; row < h; row++)
+    for (Int row = 0; row < h; row++)
     {
         cout << borderColor << " ";
         bool lastIsDead = true; // Used for coloring
-        for (int col = 0; col < w; col++)
+        for (Int col = 0; col < w; col++)
         {
             // Alive
             if (isAlive(row, col))
@@ -119,7 +119,7 @@ void Board::print()
 
     // Output border row
     cout << borderColor;
-    for (int col = 0; col < w + 1; col++) cout << "  ";
+    for (Int col = 0; col < w + 1; col++) cout << "  ";
     cout << reset << endl;
 }
 
