@@ -72,11 +72,6 @@ void Board::_inputAliveLoc(Int xStart, Int yStart, Int xEnd, Int yEnd)
 
 void Board::print()
 {
-    val darkColor = "\x1b[48;5;0m\x1b[38;5;15m";
-    val lightColor = "\x1b[48;5;15m\x1b[38;5;0m";
-    val borderColor = "\x1b[48;5;11m";
-    val reset = "\x1b[0m";
-
     // Output border row
     cout << borderColor;
     for (Int col = 0; col < w + 1; col++) cout << "  ";
