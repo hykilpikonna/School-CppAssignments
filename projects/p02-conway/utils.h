@@ -27,8 +27,17 @@ Long pointHash(Int x, Int y);
 tuple<Int, Int> pointUnhash(Long hash);
 
 /**
+ * Input a line
+ *
+ * @param prompt
+ * @return String input
+ */
+String inputLine(const string& prompt = "");
+
+/**
  * Input int in a way that doesn't break getlines
  *
+ * @param prompt
  * @return Int input
  */
 int inputInt(const string& prompt = "");
