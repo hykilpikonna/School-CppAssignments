@@ -16,6 +16,7 @@
 // Custom macros
 #include "macros.h"
 #include "utils.h"
+#include "Board.h"
 
 /**
  * Where magic happens
@@ -23,17 +24,6 @@
  * @return Exit code
  */
 int main();
-
-/**
- * A board contains an array of alive points
- */
-class Board
-{
-public:
-    vector<Long> alive;
-
-
-};
 
 /**
  * Start simulation
