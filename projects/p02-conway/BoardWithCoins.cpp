@@ -11,7 +11,7 @@ int BoardWithCoins::findCoin(Long hash) const
 
 void BoardWithCoins::print()
 {
-    String result;
+    String result = "\033[2J\033[H\n";
 
     // Output border row
     result += borderColor + repeat("  ", w + 1) + reset + "\n";
@@ -45,7 +45,7 @@ void BoardWithCoins::print()
             }
 
             // Output spaces or coins
-            result += (findCoin(pointHash(row, col)) != -1 ? "()" : "  ");
+            result += (findCoin(pointHash(row, col)) != -1 ? "<>" : "  ");
         }
 
         // Reset color for the end

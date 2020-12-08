@@ -70,9 +70,9 @@ void startSim()
     while (true)
     {
         this_thread::sleep_for(0.1s);
-        cout << "\033[2J\033[H\nPress Ctrl+C to quit..." << endl;
         board.tick();
         board.print();
+        cout << "Press Ctrl+C to stop." << endl;
 
         if (board.alive.empty()) break;
     }
@@ -98,10 +98,10 @@ void startChallenge()
     while (true)
     {
         this_thread::sleep_for(0.1s);
-        cout << "\033[2J\033[H\nPress Ctrl+C to quit..." << endl;
         coins += board.tickWithCoins();
         board.print();
         cout << yellow << "You have " << coins << " coins!" << reset << endl;
+        cout << "Press Ctrl+C to stop." << endl;
 
         // Win! \(^o^)/~
         if (coins >= 50 * 50 - 16 * 16)
