@@ -72,13 +72,16 @@ void Board::_inputAliveLoc(Int xStart, Int yStart, Int xEnd, Int yEnd)
 
 void Board::print()
 {
+    String result;
+
     // Output border row
-    cout << borderColor << repeat("  ", w + 1) << reset << endl;
+    result += borderColor + repeat("  ", w + 1) + reset + "\n";
 
     // Loop through all elements
     for (Int row = 0; row < h; row++)
     {
-        cout << borderColor << " ";
+        result += borderColor;
+        result += " ";
         bool lastIsDead = true; // Used for coloring
         for (Int col = 0; col < w; col++)
         {
@@ -88,30 +91,32 @@ void Board::print()
                 if (col == 0 || lastIsDead)
                 {
                     lastIsDead = false;
-                    cout << lightColor;
+                    result += lightColor;
                 }
             }
 
-            // Dead
+                // Dead
             else
             {
                 if (col == 0 || !lastIsDead)
                 {
                     lastIsDead = true;
-                    cout << darkColor;
+                    result += darkColor;
                 }
             }
 
-            // Output spaces
-            cout << "  ";
+            // Output spaces or coins
+            result += "  ";
         }
 
         // Reset color for the end
-        cout << borderColor << " " << reset <<  endl;
+        result += borderColor + String(" ") + reset + "\n";
     }
 
     // Output border row
-    cout << borderColor << repeat("  ", w + 1) << reset << endl;
+    result += borderColor + repeat("  ", w + 1) + reset + "\n";
+
+    cout << result;
 }
 
 bool Board::isAlive(Int x, Int y)

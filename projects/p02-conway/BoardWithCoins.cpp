@@ -11,13 +11,16 @@ int BoardWithCoins::findCoin(Long hash) const
 
 void BoardWithCoins::print()
 {
+    String result;
+
     // Output border row
-    cout << borderColor << repeat("  ", w + 1) << reset << endl;
+    result += borderColor + repeat("  ", w + 1) + reset + "\n";
 
     // Loop through all elements
     for (Int row = 0; row < h; row++)
     {
-        cout << borderColor << " ";
+        result += borderColor;
+        result += " ";
         bool lastIsDead = true; // Used for coloring
         for (Int col = 0; col < w; col++)
         {
@@ -27,7 +30,7 @@ void BoardWithCoins::print()
                 if (col == 0 || lastIsDead)
                 {
                     lastIsDead = false;
-                    cout << lightColor;
+                    result += lightColor;
                 }
             }
 
@@ -37,20 +40,22 @@ void BoardWithCoins::print()
                 if (col == 0 || !lastIsDead)
                 {
                     lastIsDead = true;
-                    cout << darkColor;
+                    result += darkColor;
                 }
             }
 
             // Output spaces or coins
-            cout << (findCoin(pointHash(row, col)) != -1 ? "()" : "  ");
+            result += (findCoin(pointHash(row, col)) != -1 ? "()" : "  ");
         }
 
         // Reset color for the end
-        cout << borderColor << " " << reset <<  endl;
+        result += borderColor + String(" ") + reset + "\n";
     }
 
     // Output border row
-    cout << borderColor << repeat("  ", w + 1) << reset << endl;
+    result += borderColor + repeat("  ", w + 1) + reset + "\n";
+
+    cout << result;
 }
 
 Int BoardWithCoins::tickWithCoins()
