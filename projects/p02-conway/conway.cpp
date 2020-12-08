@@ -2,7 +2,6 @@
 // Created by Hykilpikonna on 12/7/20.
 //
 
-
 // Custom macros
 #include "macros.h"
 
@@ -13,31 +12,6 @@
  *   because it doesn't have to check every single position on
  *   the grid when it updates.
  */
-
-/**
- * Convert a position into one long number, with the first 32
- * bits being the bits from the first int32, and the next 32
- * bits being the bits from the second int32.
- *
- * @param x Position X (Positive).
- * @param y Position Y (Positive).
- * @return Long number.
- */
-Long pointHash(Int x, Int y)
-{
-    return ((Long) x << 32u) + y;
-}
-
-/**
- * Convert the long number back to the position.
- *
- * @param hash Long number
- * @return Position X and Y
- */
-tuple<Int, Int> pointUnhash(Long hash)
-{
-    return {hash >> 32u, hash & 0xFFFFFFFF};
-}
 
 /**
  * A board contains an array of alive points
