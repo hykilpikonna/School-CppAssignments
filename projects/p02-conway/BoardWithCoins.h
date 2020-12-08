@@ -48,7 +48,7 @@ public:
      * @param xEnd
      * @param yEnd
      */
-    void fillCoins(Int x, Int y, Int xEnd, Int yEnd);
+    void fillCoins(Int x, Int y, Int xEnd, Int yEnd, Int step = 1);
 };
 
 

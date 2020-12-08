@@ -78,11 +78,11 @@ Int BoardWithCoins::tickWithCoins()
     return sum;
 }
 
-void BoardWithCoins::fillCoins(Int xs, Int ys, Int xEnd, Int yEnd)
+void BoardWithCoins::fillCoins(Int xs, Int ys, Int xEnd, Int yEnd, Int step)
 {
-    for (Int x = xs; x < xEnd; x++)
+    for (Int x = xs; x < xEnd; x += step)
     {
-        for (Int y = ys; y < yEnd; y++)
+        for (Int y = ys; y < yEnd; y += step)
         {
             coins.emplace_back(pointHash(x, y));
         }

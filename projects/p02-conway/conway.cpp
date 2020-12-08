@@ -87,8 +87,8 @@ void startChallenge()
     board.input(0, 0, 16, 16);
 
     // Fill coins everywhere besides the 16x16
-    board.fillCoins(0, 16, 50, 50);
-    board.fillCoins(16, 0, 50, 50);
+    board.fillCoins(0, 16, 50, 50, 2);
+    board.fillCoins(16, 0, 50, 50, 2);
 
     board.print();
 
