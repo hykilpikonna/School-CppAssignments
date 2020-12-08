@@ -6,6 +6,7 @@
 #define HOMEWORKS_BOARD_H
 
 #include "macros.h"
+#include "utils.h"
 
 /**
  * A board contains an array of alive points
@@ -28,7 +29,7 @@ public:
     /**
      * Asks the user to input the board
      */
-    void input(bool custom = false);
+    void input(char aliveChar = '1');
 };
 
 #endif //HOMEWORKS_BOARD_H
