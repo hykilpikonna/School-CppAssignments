@@ -23,6 +23,43 @@ void Board::input(char aliveChar)
     cout << "Input received!" << endl;
 }
 
+void Board::print()
+{
+    const String darkColor = "\x1b[48;5;0m\x1b[38;5;15m";
+    const String lightColor = "\x1b[48;5;15m\x1b[38;5;0m";
+
+    // Loop through all elements
+    for (int row = 0; row < h; row++)
+    {
+        bool lastIsDead = true; // Used for coloring
+        for (int col = 0; col < w; col++)
+        {
+            // Alive
+            if (isAlive(row, col))
+            {
+                if (col == 0 || lastIsDead)
+                {
+                    lastIsDead = false;
+                    cout << lightColor;
+                }
+            }
+
+            // Dead
+            else
+            {
+                if (col == 0 || !lastIsDead)
+                {
+                    lastIsDead = true;
+                    cout << darkColor;
+                }
+            }
+
+            // Output spaces
+            cout << "  ";
+        }
+    }
+}
+
 bool Board::isAlive(Int x, Int y)
 {
     // The alive array must be sorted. Use binary search to optimize.
