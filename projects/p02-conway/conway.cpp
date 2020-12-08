@@ -1,19 +1,12 @@
 //
 // Created by Hykilpikonna on 12/7/20.
 //
-#include "iostream"
-#include "vector"
-#include "map"
-#include "unordered_map"
-#include "algorithm"
-#include "cstdint"
-#include "tuple"
+
+
+// Custom macros
+#include "macros.h"
 
 using namespace std;
-
-// Terrible C stuff: int is only 16-bits on LP32
-#define Int uint32_t
-#define Long uint64_t
 
 /*
  * Design notes:
