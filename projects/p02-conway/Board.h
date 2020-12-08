@@ -14,7 +14,7 @@
 class Board
 {
 public:
-    vector<Long> alive;
+    List<Long> alive;
     Int w;
     Int h;
 

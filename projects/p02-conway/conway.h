@@ -33,10 +33,9 @@ void runTests();
 /**
  * Start simulation
  *
- * @param width
- * @param height
+ * @param board
  */
-void startSim(int width, int height);
+void startSim(Board board);
 
 void startChallenge();
 

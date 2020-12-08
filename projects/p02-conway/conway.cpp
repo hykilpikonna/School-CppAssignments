@@ -26,9 +26,11 @@ int main(int argc, char* argv[])
     // Simulation
     if (inputInt() == 0)
     {
-        int width = inputInt("Input your board width: ");
-        int height = inputInt("Input your board height: ");
-        startSim(width, height);
+        val width = inputInt("Input your board width: ");
+        val height = inputInt("Input your board height: ");
+        var board = Board(width, height);
+        board.input();
+        startSim(board);
     }
 
     return 0;
@@ -38,11 +40,11 @@ void runTests()
 {
     // Point: Hash and unhash
     assert(pointHash(5, 1) == 21474836481);
-    auto [x, y] = pointUnhash(21474836481);
+    val [x, y] = pointUnhash(21474836481);
     assert(x == 5 && y == 1);
 }
 
-void startSim(int width, int height)
+void startSim(Board board)
 {
 
 }
