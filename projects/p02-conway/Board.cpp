@@ -81,6 +81,11 @@ void Board::print()
 
 bool Board::isAlive(Int x, Int y)
 {
+    return isAlive(pointHash(x, y));
+}
+
+bool Board::isAlive(Long point)
+{
     // The alive array must be sorted. Use binary search to optimize.
-    return binary_search(alive.begin(), alive.end(), pointHash(x, y));
+    return binary_search(alive.begin(), alive.end(), point);
 }
