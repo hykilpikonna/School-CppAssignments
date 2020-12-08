@@ -81,13 +81,11 @@ void Board::print()
 
 bool Board::isAlive(Int x, Int y)
 {
-    return isAlive(pointHash(x, y));
-}
+    if (x < 0 || x > w) return false;
+    if (y < 0 || y > h) return false;
 
-bool Board::isAlive(Long point)
-{
     // The alive array must be sorted. Use binary search to optimize.
-    return binary_search(alive.begin(), alive.end(), point);
+    return binary_search(alive.begin(), alive.end(), pointHash(x, y));
 }
 
 void Board::tick() // TODO: Optimize
@@ -120,7 +118,7 @@ void Board::tick() // TODO: Optimize
                     sum ++;
 
         // Apply rules to current block
-        if (shouldSurvive(isAlive(point), sum))
+        if (shouldSurvive(isAlive(x, y), sum))
             newAlive.emplace_back(point);
     }
 

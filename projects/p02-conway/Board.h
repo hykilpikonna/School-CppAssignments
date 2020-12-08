@@ -46,14 +46,6 @@ public:
     bool isAlive(Int x, Int y);
 
     /**
-     * Get whether the cell at a position is alive. (Assumes `alive` is sorted)
-     *
-     * @param point Point Hash
-     * @return Is alive or not.
-     */
-    bool isAlive(Long point);
-
-    /**
      * Run a tick
      */
     void tick();
