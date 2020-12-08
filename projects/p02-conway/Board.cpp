@@ -20,6 +20,9 @@ void Board::input(char aliveChar)
         }
     }
 
+    // Sort new alive list
+    sort(alive.begin(), alive.end());
+
     cout << "Input received!" << endl;
 }
 
