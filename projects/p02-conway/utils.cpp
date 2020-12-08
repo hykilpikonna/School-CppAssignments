@@ -14,14 +14,14 @@ tuple<Int, Int> pointUnhash(Long hash)
     return {hash >> 32u, hash & 0xFFFFFFFF};
 }
 
-String inputLine(const String& prompt)
+String inputLine(const String &prompt)
 {
     String input;
     getline(cin, input);
     return input;
 }
 
-int inputInt(const String& prompt)
+int inputInt(const String &prompt)
 {
     auto input = inputLine(prompt);
     if (input.empty()) return 0;

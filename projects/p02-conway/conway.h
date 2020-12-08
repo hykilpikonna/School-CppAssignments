@@ -23,7 +23,12 @@
  *
  * @return Exit code
  */
-int main();
+int main(int argc, char* argv[]);
+
+/**
+ * Run tests
+ */
+void runTests();
 
 /**
  * Start simulation
