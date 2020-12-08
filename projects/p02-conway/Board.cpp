@@ -13,7 +13,7 @@ void Board::input(char aliveChar)
     {
         // Every char in a line
         String line = inputLine();
-        for (int col = 0; col < line.length(); col++)
+        for (int col = 0; col < min(Int(line.length()), w); col++)
         {
             // Found alive cell
             if (line[col] == aliveChar) alive.emplace_back(pointHash(row, col));
@@ -25,12 +25,20 @@ void Board::input(char aliveChar)
 
 void Board::print()
 {
-    const String darkColor = "\x1b[48;5;0m\x1b[38;5;15m";
-    const String lightColor = "\x1b[48;5;15m\x1b[38;5;0m";
+    val darkColor = "\x1b[48;5;0m\x1b[38;5;15m";
+    val lightColor = "\x1b[48;5;15m\x1b[38;5;0m";
+    val borderColor = "\x1b[48;5;11m";
+    val reset = "\x1b[0m";
+
+    // Output border row
+    cout << borderColor;
+    for (int col = 0; col < w + 1; col++) cout << "  ";
+    cout << reset << endl;
 
     // Loop through all elements
     for (int row = 0; row < h; row++)
     {
+        cout << borderColor << " ";
         bool lastIsDead = true; // Used for coloring
         for (int col = 0; col < w; col++)
         {
@@ -57,7 +65,15 @@ void Board::print()
             // Output spaces
             cout << "  ";
         }
+
+        // Reset color for the end
+        cout << borderColor << " " << reset <<  endl;
     }
+
+    // Output border row
+    cout << borderColor;
+    for (int col = 0; col < w + 1; col++) cout << "  ";
+    cout << reset << endl;
 }
 
 bool Board::isAlive(Int x, Int y)

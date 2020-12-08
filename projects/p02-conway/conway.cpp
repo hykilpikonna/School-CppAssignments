@@ -30,6 +30,7 @@ int main(int argc, char* argv[])
         val height = inputInt("Input your board height: ");
         var board = Board(width, height);
         board.input();
+        board.print();
         startSim(board);
     }
 
