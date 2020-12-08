@@ -17,6 +17,7 @@
 #include "macros.h"
 #include "utils.h"
 #include "Board.h"
+#include "BoardWithCoins.h"
 
 /**
  * Where magic happens
@@ -32,11 +33,12 @@ void runTests();
 
 /**
  * Start simulation
- *
- * @param board
  */
-void startSim(Board board);
+void startSim();
 
+/**
+ * Start challenge
+ */
 void startChallenge();
 
 #endif //HOMEWORKS_CONWAY_H

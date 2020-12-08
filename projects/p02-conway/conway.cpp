@@ -25,26 +25,9 @@ int main(int argc, char* argv[])
 
     switch (inputInt())
     {
-        case 1: // Simulation
-        {
-            val width = inputInt("Input your board width: ");
-            val height = inputInt("Input your board height: ");
-            var board = Board(width, height);
-            board.input();
-            board.print();
-            startSim(board);
-            break;
-        }
-        case 2: // Challenge
-        {
-
-            break;
-        }
-        default:
-        {
-            cout << "What?" << endl;
-            break;
-        }
+        case 1: startSim(); break;
+        case 2: startChallenge(); break;
+        default: cout << "What?" << endl; break;
     }
 
     return 0;
@@ -76,8 +59,14 @@ void runTests()
     cout << "All Tests Passed!" << endl;
 }
 
-void startSim(Board board)
+void startSim()
 {
+    val width = inputInt("Input your board width: ");
+    val height = inputInt("Input your board height: ");
+    var board = Board(width, height);
+    board.input();
+    board.print();
+
     while (true)
     {
         this_thread::sleep_for(0.1s);
@@ -87,4 +76,19 @@ void startSim(Board board)
 
         if (board.alive.empty()) break;
     }
+}
+
+void startChallenge()
+{
+    cout << "Your challenge is, try to get as many coins as you can! \n"
+            "But you can only control this 16x16 grid in a 50x50 world. \n";
+
+    var board = BoardWithCoins(50, 50);
+    board.input(0, 0, 16, 16);
+
+    // Fill coins everywhere besides the 16x16
+    board.fillCoins(0, 16, 50, 50);
+    board.fillCoins(16, 0, 50, 50);
+
+    board.print();
 }
