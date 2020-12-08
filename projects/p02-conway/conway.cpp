@@ -103,6 +103,13 @@ void startChallenge()
         board.print();
         cout << yellow << "You have " << coins << " coins!";
 
+        // Win! \(^o^)/~
+        if (coins >= 50 * 50 - 16 * 16)
+        {
+            cout << yellow << "Yay! You've got all the points!" << endl;
+            break;
+        }
+        
         if (board.alive.empty()) break;
     }
 }
