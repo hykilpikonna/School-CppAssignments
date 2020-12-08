@@ -67,9 +67,11 @@ void startSim(Board board)
 {
     while (true)
     {
-        cout << "Press any key to continue or Ctrl+C to break..." << endl;
-        cin.ignore();
+        this_thread::sleep_for(0.1s);
+        cout << "\033[2J\033[H\nPress Ctrl+C to quit..." << endl;
         board.tick();
         board.print();
+
+        if (board.alive.empty()) break;
     }
 }
