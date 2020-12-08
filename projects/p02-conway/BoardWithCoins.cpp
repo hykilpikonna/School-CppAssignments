@@ -17,17 +17,17 @@ void BoardWithCoins::print()
     result += borderColor + repeat("  ", w + 1) + reset + "\n";
 
     // Loop through all elements
-    for (Int row = 0; row < h; row++)
+    for (Int y = 0; y < h; y++)
     {
         result += borderColor;
         result += " ";
         bool lastIsDead = true; // Used for coloring
-        for (Int col = 0; col < w; col++)
+        for (Int x = 0; x < w; x++)
         {
             // Alive
-            if (isAlive(row, col))
+            if (isAlive(x, y))
             {
-                if (col == 0 || lastIsDead)
+                if (x == 0 || lastIsDead)
                 {
                     lastIsDead = false;
                     result += lightColor;
@@ -37,7 +37,7 @@ void BoardWithCoins::print()
             // Dead
             else
             {
-                if (col == 0 || !lastIsDead)
+                if (x == 0 || !lastIsDead)
                 {
                     lastIsDead = true;
                     result += darkColor;
@@ -45,7 +45,7 @@ void BoardWithCoins::print()
             }
 
             // Output spaces or coins
-            result += (findCoin(pointHash(row, col)) != -1 ? "()" : "  ");
+            result += (findCoin(pointHash(x, y)) != -1 ? "()" : "  ");
         }
 
         // Reset color for the end
