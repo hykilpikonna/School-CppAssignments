@@ -26,4 +26,11 @@ Long pointHash(Int x, Int y);
  */
 tuple<Int, Int> pointUnhash(Long hash);
 
+/**
+ * Input int in a way that doesn't break getlines
+ *
+ * @return Int input
+ */
+int inputInt(const string& prompt);
+
 #endif //HOMEWORKS_CONWAY_UTILS_H

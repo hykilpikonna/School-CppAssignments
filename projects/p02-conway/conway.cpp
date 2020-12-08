@@ -4,6 +4,7 @@
 
 // Custom macros
 #include "macros.h"
+#include "conway-utils.h"
 
 /*
  * Design notes:
@@ -67,15 +68,3 @@ void startSim(int width, int height)
 
 }
 
-/**
- * Input int in a way that doesn't break getlines
- *
- * @return Int input
- */
-int inputInt(const string& prompt)
-{
-    string input;
-    getline(cin, input);
-    if (input.empty()) return 0;
-    return stoi(input);
-}
