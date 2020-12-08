@@ -14,7 +14,17 @@ class Board
 {
 public:
     vector<Long> alive;
-};
+    Int w;
+    Int h;
 
+    /**
+     * Construct a board
+     *
+     * @param w Width
+     * @param h Height
+     */
+    Board(Int w, Int h): w(w), h(h) {}
+
+};
 
 #endif //HOMEWORKS_BOARD_H
