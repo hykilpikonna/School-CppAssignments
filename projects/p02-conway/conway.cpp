@@ -23,15 +23,28 @@ int main(int argc, char* argv[])
             "1: Start simulation.\n"
             "2: Try my challenge!\n";
 
-    // Simulation
-    if (inputInt() == 1)
+    switch (inputInt())
     {
-        val width = inputInt("Input your board width: ");
-        val height = inputInt("Input your board height: ");
-        var board = Board(width, height);
-        board.input();
-        board.print();
-        startSim(board);
+        case 1: // Simulation
+        {
+            val width = inputInt("Input your board width: ");
+            val height = inputInt("Input your board height: ");
+            var board = Board(width, height);
+            board.input();
+            board.print();
+            startSim(board);
+            break;
+        }
+        case 2: // Challenge
+        {
+
+            break;
+        }
+        default:
+        {
+            cout << "What?" << endl;
+            break;
+        }
     }
 
     return 0;
