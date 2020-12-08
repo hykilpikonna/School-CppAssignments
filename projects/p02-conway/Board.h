@@ -49,7 +49,7 @@ public:
     /**
      * Print the board
      */
-    void print();
+    virtual void print();
 
     /**
      * Get whether the cell at a position is alive. (Assumes `alive` is sorted)
