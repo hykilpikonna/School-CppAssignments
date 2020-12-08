@@ -32,6 +32,13 @@ public:
      * Print with coins
      */
     void print() override;
+
+    /**
+     * Tick
+     *
+     * @return How many coins are gained from this tick
+     */
+    Int tickWithCoins();
 };
 
 

@@ -52,3 +52,23 @@ void BoardWithCoins::print()
     // Output border row
     cout << borderColor << repeat("  ", w + 1) << reset << endl;
 }
+
+Int BoardWithCoins::tickWithCoins()
+{
+    var sum = 0;
+    tick();
+
+    for (val a : alive)
+    {
+        val i = findCoin(a);
+        if (i != -1)
+        {
+            sum ++;
+
+            // Remove coin: `coins` will remain sorted.
+            coins.erase(coins.begin() + i);
+        }
+    }
+
+    return sum;
+}
