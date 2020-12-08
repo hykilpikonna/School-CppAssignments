@@ -16,12 +16,14 @@
 
 using namespace std;
 
-// Terrible C stuff: int is only 16-bits on LP32
-#define Int uint32_t
-#define Long uint64_t
-
 // Kotlin habit ;-;
+#define Int uint32_t // int is only 16-bits on LP32
+#define Long uint64_t
+#define List vector
 #define HashMap unordered_map
 #define String string
+#define var auto
+#define let auto
+#define val const auto
 
 #endif //HOMEWORKS_MACROS_H
