@@ -19,7 +19,7 @@ using namespace std;
 #define HashMap unordered_map
 
 // Terrible C stuff: int is only 16-bits on LP32
-#define Int std::uint32_t
-#define Long std::uint64_t
+#define Int uint32_t
+#define Long uint64_t
 
 #endif //HOMEWORKS_MACROS_H
