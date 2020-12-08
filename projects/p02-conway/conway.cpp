@@ -3,29 +3,60 @@
 //
 #include "iostream"
 #include "vector"
+#include "map"
+#include "unordered_map"
 #include "algorithm"
+#include "cstdint"
+#include "tuple"
 
 using namespace std;
 
-#define Board vector<Point>
+// Terrible C stuff: int is only 16-bits on LP32
+#define Int uint32_t
+#define Long uint64_t
 
 /*
  * Design notes:
  * 1. About using an array of points rather than a 2D grid:
  *   An array of alive points is more optimized for large grids
  *   because it doesn't have to check every single position on
- *   the grid when it updates. (A Board is a vector<Point>)
+ *   the grid when it updates.
  */
 
 /**
- * 2D Point class
+ * Convert a position into one long number, with the first 32
+ * bits being the bits from the first int32, and the next 32
+ * bits being the bits from the second int32.
+ *
+ * @param x Position X (Positive).
+ * @param y Position Y (Positive).
+ * @return Long number.
  */
-class Point
+Long pointHash(Int x, Int y)
+{
+    return ((Long) x << 32u) + y;
+}
+
+/**
+ * Convert the long number back to the position.
+ *
+ * @param hash Long number
+ * @return Position X and Y
+ */
+tuple<Int, Int> pointUnhash(Long hash)
+{
+    return {hash >> 32u, hash & 0xFFFFFFFF};
+}
+
+/**
+ * A board contains an array of alive points
+ */
+class Board
 {
 public:
-    int x, y;
-    Point(): Point(0, 0) {}
-    Point(int x, int y) : x(x), y(y) {}
+    vector<Long> alive;
+
+
 };
 
 // Procedural programming: Functions for steps in a program
