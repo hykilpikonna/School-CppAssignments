@@ -13,12 +13,14 @@
 #include "algorithm"
 #include "tuple"
 #include "string"
+#include "set"
 
 using namespace std;
 
 // Kotlin habit ;-;
 #define Int uint32_t // int is only 16-bits on LP32
 #define Long uint64_t
+#define Set set
 #define List vector
 #define HashMap unordered_map
 #define String string
