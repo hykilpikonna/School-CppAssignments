@@ -28,3 +28,27 @@ int inputInt(const String &prompt)
     if (input.empty()) return 0;
     return stoi(input);
 }
+
+bool shouldSurvive(bool currentAlive, Int aliveNeighbors)
+{
+    if (currentAlive)
+    {
+        // 1. Any live cell with fewer than two live neighbours dies,
+        //   as if by underpopulation
+
+        // 2. Any live cell with two or three live neighbours lives
+        //   on to the next generation.
+        if (aliveNeighbors == 2 || aliveNeighbors == 3) return true;
+
+        // 3. Any live cell with more than three live neighbours dies,
+        //   as if by overpopulation.
+    }
+    else
+    {
+        // 4. Any dead cell with exactly three live neighbours becomes
+        //   a live cell, as if by reproduction.
+        if (aliveNeighbors == 3) return true;
+    }
+
+    return false;
+}

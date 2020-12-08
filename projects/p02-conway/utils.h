@@ -42,4 +42,12 @@ String inputLine(const string& prompt = "");
  */
 int inputInt(const string& prompt = "");
 
+/**
+ * Check if a cell should survive
+ *
+ * @param aliveNeighbors How many neighbors are alive
+ * @return It should survive or not
+ */
+bool shouldSurvive(bool currentAlive, Int aliveNeighbors);
+
 #endif //HOMEWORKS_CONWAY_UTILS_H
