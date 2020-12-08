@@ -59,3 +59,11 @@ String repeat(const String &str, Int times)
     for (var i = 0; i < times; i++) s += str;
     return s;
 }
+
+// https://stackoverflow.com/a/46824354/7346633
+int binarySearchIndexOf(List<Long> v, Long data)
+{
+    val it = lower_bound(v.begin(), v.end(), data);
+    if (it == v.end() || *it != data) return -1;
+    else return distance(v.begin(), it);
+}

@@ -59,4 +59,14 @@ bool shouldSurvive(bool currentAlive, Int aliveNeighbors);
  */
 String repeat(const String &str, Int times);
 
+/**
+ * Find the index through a binary search
+ * https://stackoverflow.com/a/46824354/7346633
+ *
+ * @param v Vector
+ * @param data Data
+ * @return Index or -1
+ */
+int binarySearchIndexOf(List<Long> v, Long data);
+
 #endif //HOMEWORKS_CONWAY_UTILS_H
