@@ -30,8 +30,8 @@ using namespace std;
 #define val const auto
 
 // Colors
-val darkColor = "\x1b[48;5;0m\x1b[38;5;15m";
-val lightColor = "\x1b[48;5;15m\x1b[38;5;0m";
+val darkColor = "\x1b[48;5;0m\x1b[38;5;11m";
+val lightColor = "\x1b[48;5;15m\x1b[38;5;11m";
 val borderColor = "\x1b[48;5;11m";
 val reset = "\x1b[0m";
 
