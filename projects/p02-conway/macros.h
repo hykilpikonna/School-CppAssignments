@@ -13,6 +13,8 @@
 #include "algorithm"
 #include "tuple"
 
+using namespace std;
+
 // Kotlin habit ;-;
 #define HashMap unordered_map
 

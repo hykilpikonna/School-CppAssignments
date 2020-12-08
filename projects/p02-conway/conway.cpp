@@ -6,8 +6,6 @@
 // Custom macros
 #include "macros.h"
 
-using namespace std;
-
 /*
  * Design notes:
  * 1. About using an array of points rather than a 2D grid:
