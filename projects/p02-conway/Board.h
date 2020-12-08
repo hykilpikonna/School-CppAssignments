@@ -52,6 +52,11 @@ public:
      * @return Is alive or not.
      */
     bool isAlive(Long point);
+
+    /**
+     * Run a tick
+     */
+    void tick();
 };
 
 #endif //HOMEWORKS_BOARD_H

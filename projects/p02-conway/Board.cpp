@@ -89,3 +89,44 @@ bool Board::isAlive(Long point)
     // The alive array must be sorted. Use binary search to optimize.
     return binary_search(alive.begin(), alive.end(), point);
 }
+
+void Board::tick() // TODO: Optimize
+{
+    // Create new lists
+    var newAlive = List<Long>();
+    var toCheck = Set<Long>();
+
+    // Add all alive points and their neighbors to check
+    for (val point : alive)
+    {
+        val [x, y] = pointUnhash(point);
+
+        // Add all points within 9x9
+        for (var dx : {-1, 0, 1})
+            for (var dy : {-1, 0, 1})
+                toCheck.emplace(pointHash(x + dx, y + dy));
+    }
+
+    // Loop through points to check
+    for (val point : toCheck)
+    {
+        val [x, y] = pointUnhash(point);
+
+        // Count how many points in 9x9 are alive
+        var sum = 0;
+        for (var dx : {-1, 0, 1})
+            for (var dy : {-1, 0, 1})
+                if (!(dx == 0 && dy == 0) && isAlive(x + dx, y + dy))
+                    sum ++;
+
+        // Apply rules to current block
+        if (shouldSurvive(isAlive(point), sum))
+            newAlive.emplace_back(point);
+    }
+
+    // Sort new alive list
+    sort(newAlive.begin(), newAlive.end());
+
+    // Update list
+    alive = newAlive;
+}
