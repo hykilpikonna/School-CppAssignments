@@ -45,7 +45,7 @@ void BoardWithCoins::print()
             }
 
             // Output spaces or coins
-            result += (findCoin(pointHash(row, col)) != -1 ? "<>" : "  ");
+            result += (findCoin(pointHash(row, col)) != -1 ? "()" : "  ");
         }
 
         // Reset color for the end
