@@ -42,7 +42,7 @@ void BoardWithCoins::print()
             }
 
             // Output spaces or coins
-            cout << (findCoin(pointHash(col, row)) != -1 ? "()" : "  ");
+            cout << (findCoin(pointHash(row, col)) != -1 ? "()" : "  ");
         }
 
         // Reset color for the end
