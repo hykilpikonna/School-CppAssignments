@@ -72,3 +72,15 @@ Int BoardWithCoins::tickWithCoins()
 
     return sum;
 }
+
+void BoardWithCoins::fillCoins(Int xs, Int ys, Int xEnd, Int yEnd)
+{
+    for (Int x = xs; x < xEnd; x++)
+    {
+        for (Int y = ys; y < yEnd; y++)
+        {
+            coins.emplace_back(pointHash(x, y));
+        }
+    }
+    sort(coins.begin(), coins.end());
+}

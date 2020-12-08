@@ -39,6 +39,16 @@ public:
      * @return How many coins are gained from this tick
      */
     Int tickWithCoins();
+
+    /**
+     * Fill coins
+     *
+     * @param x
+     * @param y
+     * @param xEnd
+     * @param yEnd
+     */
+    void fillCoins(Int x, Int y, Int xEnd, Int yEnd);
 };
 
 
