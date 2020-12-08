@@ -31,6 +31,6 @@ tuple<Int, Int> pointUnhash(Long hash);
  *
  * @return Int input
  */
-int inputInt(const string& prompt);
+int inputInt(const string& prompt = "");
 
 #endif //HOMEWORKS_CONWAY_UTILS_H
