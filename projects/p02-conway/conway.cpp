@@ -91,4 +91,18 @@ void startChallenge()
     board.fillCoins(16, 0, 50, 50);
 
     board.print();
+
+    // Count coins collected
+    var coins = 0;
+
+    while (true)
+    {
+        this_thread::sleep_for(0.1s);
+        cout << "\033[2J\033[H\nPress Ctrl+C to quit..." << endl;
+        coins += board.tickWithCoins();
+        board.print();
+        cout << yellow << "You have " << coins << " coins!";
+
+        if (board.alive.empty()) break;
+    }
 }
