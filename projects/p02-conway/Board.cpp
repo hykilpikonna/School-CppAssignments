@@ -22,3 +22,9 @@ void Board::input(char aliveChar)
 
     cout << "Input received!" << endl;
 }
+
+bool Board::isAlive(Int x, Int y)
+{
+    // The alive array must be sorted. Use binary search to optimize.
+    return binary_search(alive.begin(), alive.end(), pointHash(x, y));
+}

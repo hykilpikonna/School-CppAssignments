@@ -30,6 +30,15 @@ public:
      * Asks the user to input the board
      */
     void input(char aliveChar = '1');
+
+    /**
+     * Get whether the cell at a position is alive. (Assumes `alive` is sorted)
+     *
+     * @param x Position X.
+     * @param y Position Y.
+     * @return Is alive or not.
+     */
+    bool isAlive(Int x, Int y);
 };
 
 #endif //HOMEWORKS_BOARD_H
