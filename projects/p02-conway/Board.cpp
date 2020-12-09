@@ -42,7 +42,7 @@ void Board::_inputMatrix(Int xStart, Int yStart, Int xEnd, Int yEnd, char aliveC
         for (int col = xStart; col < min(Int(line.length()), xEnd); col++)
         {
             // Found alive cell
-            if (line[col] == aliveChar) alive.emplace_back(pointHash(row, col));
+            if (line[col] == aliveChar) alive.emplace_back(pointHash(col, row));
         }
     }
 }
