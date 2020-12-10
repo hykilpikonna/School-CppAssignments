@@ -4,30 +4,46 @@
 #include "iostream"
 #include <cstdint>
 #include <iomanip>
+#include <vector>
+#include "thread"
 #define long int64_t
 
 using namespace std;
 
-long elder_age(long m, long n, long l, long t)
+template <typename T> string join(const vector<T>& array, const string& separator, const string& pre, const string& post)
 {
-    long sum = 0;
-    for (long row = 1; row < m; row++)
+    string result;
+
+    for (int i = 0; i < array.size(); i++)
     {
-        for (long col = 0; col < row; col++)
-        {
-            long val = (row ^ col);
-            if (val != 1) val = val * 4 - 2;
-            val -= l;
-            val = val > 0 ? val : 0;
-            std::cout << val << ",";
-            sum = (sum + val) % t;
-        }
-        std::cout << std::endl;
+        result += to_string(array[i]);
+        if (i != array.size() - 1)
+            result += separator;
     }
-    return sum;
+
+    return pre + result + post;
 }
 
 int main()
 {
-    elder_age(256, 256, 0, 1u << sizeof(long));
+    cout << thread::hardware_concurrency() << endl;
+
+    auto lx = vector<int>();
+    auto ly = vector<int>();
+//    cout << "[" << (15 - i) << ", " << (15 - y) << "]";
+    for (int i = 0; i < 8; ++i)
+    {
+        for (int x = 0; x < i; x++)
+        {
+            lx.emplace_back(x);
+            ly.emplace_back(i);
+        }
+        for (int y = 0; y <= i; y++)
+        {
+            lx.emplace_back(i);
+            ly.emplace_back(y);
+        }
+    }
+    cout << join(lx, ",", "{", "}") << endl;
+    cout << join(ly, ",", "{", "}") << endl;
 }

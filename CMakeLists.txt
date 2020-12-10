@@ -2,11 +2,18 @@ cmake_minimum_required(VERSION 3.17)
 project(homeworks)
 
 set(CMAKE_CXX_STANDARD 17)
+find_package(ArrayFire)
+add_executable(arrayfire projects/p02-conway-arrayfire/conwayaf.cpp projects/p02-conway-arrayfire/conwayaf.h)
+
+# To use Unified backend, do the following.
+# Unified backend lets you choose the backend at runtime
+target_link_libraries(arrayfire ArrayFire::af)
 
 #add_executable(homeworks homeworks/b017-row-sum.cpp)
-add_executable(conway projects/p02-conway/macros.h projects/p02-conway/utils.cpp projects/p02-conway/utils.h projects/p02-conway/conway.cpp projects/p02-conway/conway.h projects/p02-conway/Board.cpp projects/p02-conway/Board.h projects/p02-conway/BoardWithCoins.cpp projects/p02-conway/BoardWithCoins.h)
+add_executable(conway projects/p02-conway2d/macros.h projects/p02-conway2d/utils.cpp projects/p02-conway2d/utils.h projects/p02-conway2d/conway.cpp projects/p02-conway2d/conway.h projects/p02-conway2d/Board.cpp projects/p02-conway2d/Board.h projects/p02-conway2d/BoardWithCoins.cpp projects/p02-conway2d/BoardWithCoins.h projects/p02-conway2d/crack.cpp projects/p02-conway2d/crack.h)
+add_executable(conwaybm projects/p02-conway-bitmap/conwaybm.cpp projects/p02-conway-bitmap/ThreadPool.h projects/p02-conway2d/macros.h)
 
-#add_executable(test test.cpp)
+add_executable(test test.cpp)
 #add_executable(yahtzee projects/p01-yahtzee/yahtzee.cpp)
 #add_executable(randcrack rand/randcrack.cpp)
 #add_executable(randgen rand/randgen.cpp)
