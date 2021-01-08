@@ -41,6 +41,13 @@ public:
      * Print the board
      */
     void printBoard();
+
+    /**
+     * Get how many hits does each prize have.
+     *
+     * @return Map<Prize name, Hits>
+     */
+    Map<String, Int> getResults();
 };
 
 #endif //HOMEWORKS_PITCHPENNY_H

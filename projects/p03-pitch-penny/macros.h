@@ -29,7 +29,7 @@ using namespace std;
 #define Bool bool
 #define Set set
 #define List vector
-#define HashMap unordered_map
+#define Map unordered_map
 #define String string
 
 // Convenient things

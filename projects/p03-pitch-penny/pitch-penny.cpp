@@ -21,7 +21,6 @@ int main()
         val [loc, prize] = board.tossCoin();
         log("You've tossed at (" << loc / w << ", " << loc % w << ")");
     }
-
     board.printBoard();
     
 
@@ -108,4 +107,23 @@ void PitchPennyBoard::printBoard()
     }
     out += separator + "\n";
     cout << out;
+}
+
+Map<String, Int> PitchPennyBoard::getResults()
+{
+    // Init result map
+    var results = Map<String, Int>();
+    for (val& prize : prizeNames) results[prize] = 0;
+
+    // Count prizes
+    for (int i = 0; i < len; ++i)
+    {
+        val prize = prizeGrid[i];
+        if (pennyGrid[i] && !prize.empty())
+        {
+            results[prize]++;
+        }
+    }
+
+    return results;
 }
