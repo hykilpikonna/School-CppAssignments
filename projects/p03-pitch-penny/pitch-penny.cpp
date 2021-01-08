@@ -72,16 +72,18 @@ tuple<Int, String> PitchPennyBoard::tossCoin()
 
 void PitchPennyBoard::printBoard()
 {
+    String out = clearScreen;
+
     // Find how long is the longest prize name
     unsigned long prizeLen = 0;
     for (val& name : prizeNames) prizeLen = max(prizeLen, name.length());
     prizeLen += 2; // Padding
-    val separatorLen = (prizeLen + 1) * w + 1;
+    val separator = string((prizeLen + 1) * w + 1, '-');
 
     // Loop through the entire grid
     for (int row = 0; row < h; ++row)
     {
-        cout << string(separatorLen, '-') << endl << '|';
+        out += separator + "\n|";
 
         for (int col = 0; col < w; ++col)
         {
@@ -92,10 +94,11 @@ void PitchPennyBoard::printBoard()
             val leftSpaces = spaces / 2;
 
             // Put prize in the center between two spaces
-            cout << string(leftSpaces, ' ') << prize << string(spaces - leftSpaces - 1, ' ') << " |";
+            out += string(leftSpaces, ' ') + prize + string(spaces - leftSpaces, ' ') + "|";
         }
 
-        cout << endl;
+        out += "\n";
     }
-    cout << string(separatorLen, '-') << endl;
+    out += separator + "\n";
+    cout << out;
 }

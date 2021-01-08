@@ -38,5 +38,6 @@ val lightColor = "\x1b[48;5;15m\x1b[38;5;11m";
 val borderColor = "\x1b[48;5;11m";
 val reset = "\x1b[0m";
 val yellow = "\x1b[38;5;11m";
+val clearScreen = "\033[2J\033[H\n";
 
 #endif //HOMEWORKS_MACROS_H
