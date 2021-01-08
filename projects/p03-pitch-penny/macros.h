@@ -32,12 +32,16 @@ using namespace std;
 #define HashMap unordered_map
 #define String string
 
+// Convenient things
+#define log(msg)(cout << msg << endl)
+
 // Colors
 val darkColor = "\x1b[48;5;0m\x1b[38;5;11m";
 val lightColor = "\x1b[48;5;15m\x1b[38;5;11m";
 val borderColor = "\x1b[48;5;11m";
 val reset = "\x1b[0m";
 val yellow = "\x1b[38;5;11m";
+val yellowBackground = "\x1b[48;5;11m";
 val clearScreen = "\033[2J\033[H\n";
 
 #endif //HOMEWORKS_MACROS_H

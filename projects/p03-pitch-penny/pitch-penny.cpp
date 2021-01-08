@@ -94,7 +94,8 @@ void PitchPennyBoard::printBoard()
             val leftSpaces = spaces / 2;
 
             // Put prize in the center between two spaces
-            out += string(leftSpaces, ' ') + prize + string(spaces - leftSpaces, ' ') + "|";
+            if (pennyGrid[loc]) out += yellowBackground;
+            out += string(leftSpaces, ' ') + prize + string(spaces - leftSpaces, ' ') + reset + "|";
         }
 
         out += "\n";
