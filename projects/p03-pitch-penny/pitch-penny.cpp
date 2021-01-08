@@ -8,16 +8,22 @@ int main()
 {
     srand(time(nullptr)); // NOLINT(cert-msc51-cpp)
 
-    // Init prizeGrid and board
+    // Init prizes and board
     var prizeNames = List<String>{"Puzzle", "Doll", "Ball", "Game", "Poster"};
     var board = PitchPennyBoard(prizeNames);
-    board.printBoard();
 
-    // Toss 10 pennyGrid
+    // Toss pennies
     for (int i = 0; i < pennyCount; i++)
     {
-
+        board.printBoard();
+        log(endl << "Press any key to toss a penny...");
+        cin.ignore();
+        val [loc, prize] = board.tossCoin();
+        log("You've tossed at (" << loc / w << ", " << loc % w << ")");
     }
+
+    board.printBoard();
+    
 
     return 0;
 }
