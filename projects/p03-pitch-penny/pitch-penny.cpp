@@ -9,7 +9,7 @@ int main()
     srand(time(nullptr)); // NOLINT(cert-msc51-cpp)
 
     // Init prizes and board
-    var prizeNames = List<String>{"Puzzle", "Doll", "Ball", "Game", "Poster"};
+    var prizeNames = List<String>{"Book", "Game Boy", "Eva Figure", "A+ in Nothing", "AI Cat"};
     var board = PitchPennyBoard(prizeNames);
 
     // Toss pennies
@@ -103,8 +103,9 @@ void PitchPennyBoard::printBoard()
     // Loop through the entire grid
     for (int row = 0; row < h; ++row)
     {
-        out += separator + "\n|";
+        out += separator + "\n";
 
+        var lines = List<String> {"|", "|"};
         for (int col = 0; col < w; ++col)
         {
             // 2D position to 1D index
@@ -114,11 +115,16 @@ void PitchPennyBoard::printBoard()
             val leftSpaces = spaces / 2;
 
             // Put prize in the center between two spaces
-            if (pennyGrid[loc]) out += yellowBackground;
-            out += string(leftSpaces, ' ') + prize + string(spaces - leftSpaces, ' ') + reset + "|";
+            if (pennyGrid[loc])
+            {
+                lines[0] += yellowBackground;
+                lines[1] += yellowBackground;
+            }
+            lines[0] += string(leftSpaces, ' ') + prize + string(spaces - leftSpaces, ' ') + reset + "|";
+            lines[1] += string(prizeLen, ' ') + reset + "|";
         }
 
-        out += "\n";
+        out += lines[1] + "\n" + lines[0] + "\n" + lines[1] + "\n";
     }
     out += separator + "\n";
     cout << out;
