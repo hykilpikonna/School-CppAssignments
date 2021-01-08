@@ -22,7 +22,22 @@ int main()
         log("You've tossed at (" << loc / w << ", " << loc % w << ")");
     }
     board.printBoard();
-    
+
+    // Get results
+    log("Game ended.");
+    var results = board.getResults();
+
+    // Print prizes
+    var won = false;
+    for (val& prize : prizeNames)
+    {
+        if (results[prize] >= 3)
+        {
+            won = true;
+            log(yellow << "You've won a " << prize << reset);
+        }
+    }
+    if (!won) log("You've won some air.");
 
     return 0;
 }
