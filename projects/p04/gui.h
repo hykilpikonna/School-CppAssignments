@@ -24,8 +24,26 @@ public:
     {
         // Set draw callback function
         set_draw_func(sigc::mem_fun(*this, &MyArea::on_draw));
+
+        // Mouse
+        val controller = GestureClick::create();
+        controller->signal_released().connect(sigc::bind(sigc::mem_fun(*this, &MyArea::pressed)), false);
+        add_controller(controller);
+
     }
     ~MyArea() override = default;
+
+    /**
+     * Called whenever the mouse clicks the drawing area
+     *
+     * @param n_press What is this?
+     * @param x Horizontal pixels from the left
+     * @param y Vertical pixels from the top
+     */
+    void pressed(int n_press, double x, double y)
+    {
+        log("Pressed: " << x << ", " << y);
+    }
 
     /**
      * Draw GUI
