@@ -18,7 +18,7 @@ using namespace Gtk;
 class MyArea: public DrawingArea
 {
 public:
-    GameState state;
+    GameState game;
 
     /**
      * Constructor
@@ -48,13 +48,16 @@ public:
         log("Pressed: " << x << ", " << y);
 
         // Calculate which cell did the user press
-        if (x < gPadding || y < gPadding) return;
+        if (x < gPadding || y < gPadding) return; // Out of bounds
         val cellX = (int) (x - gPadding) / gFullCellLen;
         val cellY = (int) (y - gPadding) / gFullCellLen;
         if (cellX >= rows || cellY >= rows) return; // Out of bounds
         val loc = xyToLoc(cellX, cellY);
 
         log("Pressed cell is: " << loc);
+
+        // Click for player
+        game.movePlayer(cellX, cellY);
     }
 
     /**
