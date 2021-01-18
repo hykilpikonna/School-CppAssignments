@@ -8,6 +8,7 @@
 #include "gtkmm.h"
 #include "macros.h"
 #include "constants.h"
+#include "GameState.h"
 
 using namespace Gtk;
 
@@ -17,6 +18,8 @@ using namespace Gtk;
 class MyArea: public DrawingArea
 {
 public:
+    GameState state;
+
     /**
      * Constructor
      */
@@ -43,6 +46,14 @@ public:
     void pressed(int n_press, double x, double y)
     {
         log("Pressed: " << x << ", " << y);
+
+        // Calculate which cell did the user press
+        val cellX = (int) (x - gPadding) / gFullCellLen;
+        val cellY = (int) (y - gPadding) / gFullCellLen;
+        if (cellX >= rows || cellY >= rows) return; // Out of bounds
+        val loc = xyToLoc(cellX, cellY);
+
+        log("Pressed cell is: " << loc);
     }
 
     /**
