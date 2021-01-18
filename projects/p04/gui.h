@@ -7,16 +7,9 @@
 
 #include "gtkmm.h"
 #include "macros.h"
+#include "GUIConstnats.h"
 
 using namespace Gtk;
-
-// GUI Constants
-val rows = 3;
-val gPadding = 50;
-val gCellLen = 50;
-val gBorderLen = 2;
-val gFullCellLen = gCellLen + gBorderLen;
-val gWindowLen = gPadding * 2 + gCellLen * rows + gBorderLen * (rows + 1);
 
 /**
  * Drawing area for GUI
