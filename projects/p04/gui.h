@@ -48,6 +48,7 @@ public:
         log("Pressed: " << x << ", " << y);
 
         // Calculate which cell did the user press
+        if (x < gPadding || y < gPadding) return;
         val cellX = (int) (x - gPadding) / gFullCellLen;
         val cellY = (int) (y - gPadding) / gFullCellLen;
         if (cellX >= rows || cellY >= rows) return; // Out of bounds
