@@ -16,6 +16,7 @@
 #include "set"
 #include "thread"
 #include "iomanip"
+#include "array"
 
 using namespace std;
 

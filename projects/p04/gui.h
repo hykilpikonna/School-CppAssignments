@@ -7,7 +7,7 @@
 
 #include "gtkmm.h"
 #include "macros.h"
-#include "GUIConstnats.h"
+#include "constants.h"
 
 using namespace Gtk;
 
