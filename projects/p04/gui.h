@@ -6,8 +6,16 @@
 #define HOMEWORKS_WINDOW_H
 
 #include "gtkmm.h"
+#include "macros.h"
 
 using namespace Gtk;
+
+// GUI Constants
+val rows = 3;
+val padding = 50;
+val cellLen = 50;
+val borderWidth = 2;
+val length = padding * 2 + cellLen * rows + borderWidth * (rows + 1);
 
 /**
  * Drawing area for GUI
@@ -30,20 +38,24 @@ public:
      */
     void on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height)
     {
-        // coordinates for the center of the window
-        int xc, yc;
-        xc = width / 2;
-        yc = height / 2;
+        // Calculate values
+        val xStart = padding;
+        val yStart = padding;
+        val fullWidth = (borderWidth + cellLen) * rows;
+        val xEnd = xStart + fullWidth;
+        val yEnd = yStart + fullWidth;
 
-        cr->set_line_width(10.0);
+        // Line settings
+        cr->set_line_width(borderWidth);
 
-        // draw red lines out from the center of the window
+        // Draw vertical
         cr->set_source_rgb(0.8, 0.0, 0.0);
-        cr->move_to(0, 0);
-        cr->line_to(xc, yc);
-        cr->line_to(0, height);
-        cr->move_to(xc, yc);
-        cr->line_to(width, yc);
+        for (int row = 0; row < rows + 1; ++row)
+        {
+            val xPos = xStart + (borderWidth + cellLen) * row;
+            cr->move_to(xPos, yStart);
+            cr->line_to(xPos, yEnd);
+        }
         cr->stroke();
     }
 };
