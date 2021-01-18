@@ -27,6 +27,8 @@ public:
      */
     MyArea()
     {
+        set_size_request(gWindowLen, gWindowLen);
+
         // Set draw callback function
         set_draw_func(sigc::mem_fun(*this, &MyArea::draw));
 
