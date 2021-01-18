@@ -7,6 +7,7 @@
 
 #include "constants.h"
 #include "macros.h"
+#include "utils.h"
 
 /**
  * Player interface
@@ -22,9 +23,18 @@ class Player
 class GameState
 {
 public:
-    array<int, rows * rows> grid;
+    array<int, rows * rows> grid{};
     List<Player> players;
     int currentPlayer = 0;
+
+    /**
+     * Constructor
+     */
+    GameState()
+    {
+        // Init grid (-1: No one placed anything here yet)
+        for (int& n : grid) { n = -1; }
+    }
 };
 
 #endif //SCHOOL_CPP_GAMESTATE_H
