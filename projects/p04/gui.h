@@ -150,13 +150,13 @@ public:
 
     // UI Components
     Box box;
-    MyArea drawingArea;
-    Button buttonTest;
+    MyArea renderer;
+    Button bNewGame;
 
     /**
      * Constructor
      */
-    MyWindow(): drawingArea(game), box(Orientation::VERTICAL, 10), buttonTest("Test")
+    MyWindow(): renderer(game), box(Orientation::VERTICAL, 10), bNewGame("New Game vs Player")
     {
         // Window
         set_title("GUI");
@@ -166,10 +166,22 @@ public:
         set_child(box);
 
         // Add Components
-        box.append(drawingArea);
-        box.append(buttonTest);
+        box.append(renderer);
+        box.append(bNewGame);
+
+        // Register events
+        bNewGame.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::onClickNewGame)));
     }
     ~MyWindow() override = default;
+
+    /**
+     * Called when new game button is clicked
+     */
+    void onClickNewGame()
+    {
+        game = GameState();
+        renderer.queue_draw();
+    }
 };
 
 #endif //HOMEWORKS_WINDOW_H
