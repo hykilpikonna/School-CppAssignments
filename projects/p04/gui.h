@@ -56,7 +56,7 @@ public:
         log("Pressed cell is: " << loc);
 
         // Check if location already has something
-        if (game.grid[loc] != -1) return
+        if (game.grid[loc] != -1) return;
 
         // Click for player
         game.movePlayer(cellX, cellY);
