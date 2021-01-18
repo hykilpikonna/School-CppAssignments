@@ -58,6 +58,9 @@ public:
 
         // Click for player
         game.movePlayer(cellX, cellY);
+
+        // Refresh UI
+        queue_draw();
     }
 
     /**
