@@ -88,6 +88,35 @@ public:
             cr->line_to(xEnd, yPos);
         }
         cr->stroke();
+
+        // Draw players
+        cr->set_source_rgb(0.1, 0.1, 0.1);
+        for (int x = 0; x < rows; ++x)
+        {
+            for (int y = 0; y < rows; ++y)
+            {
+                val v = game.grid[xyToLoc(x, y)];
+
+                // Calculate cell graphics location
+                val gs = gPadding + gBorderLen;
+                val gx = gs + gFullCellLen * x;
+                val gy = gs + gFullCellLen * y;
+
+                // Player 1 (X)
+                if (v == 0)
+                {
+                    // Draw X
+                    int gxs[]{gx + gP1Padding, gx + gCellLen - gP1Padding};
+                    int gys[]{gy + gP1Padding, gy + gCellLen - gP1Padding};
+                    // Top left to bottom right
+                    cr->move_to(gxs[0], gys[0]);
+                    cr->line_to(gxs[1], gys[1]);
+                    // Top right to bottom left
+                    cr->move_to(gxs[0], gys[1]);
+                    cr->line_to(gxs[1], gys[0]);
+                    cr->stroke();
+                }
+        }
     }
 };
 
