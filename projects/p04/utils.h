@@ -14,7 +14,7 @@
  */
 int xyToLoc(int x, int y)
 {
-    return x * rows + y;
+    return y * rows + x;
 }
 
 /**
@@ -25,7 +25,7 @@ int xyToLoc(int x, int y)
  */
 tuple<int, int> locToXy(int loc)
 {
-    return {loc / rows, loc % rows};
+    return {loc % rows, loc / rows};
 }
 
 #endif //SCHOOL_CPP_UTILS_H
