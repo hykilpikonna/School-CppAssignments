@@ -39,11 +39,10 @@ public:
     /**
      * Called whenever the mouse clicks the drawing area
      *
-     * @param n_press What is this?
      * @param x Horizontal pixels from the left
      * @param y Vertical pixels from the top
      */
-    void pressed(int n_press, double x, double y)
+    void pressed(int _, double x, double y)
     {
         log("Pressed: " << x << ", " << y);
 
@@ -55,6 +54,9 @@ public:
         val loc = xyToLoc(cellX, cellY);
 
         log("Pressed cell is: " << loc);
+
+        // Check if location already has something
+        if (game.grid[loc] != -1) return
 
         // Click for player
         game.movePlayer(cellX, cellY);
