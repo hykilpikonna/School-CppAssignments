@@ -12,10 +12,11 @@ using namespace Gtk;
 
 // GUI Constants
 val rows = 3;
-val padding = 50;
-val cellLen = 50;
-val borderWidth = 2;
-val length = padding * 2 + cellLen * rows + borderWidth * (rows + 1);
+val gPadding = 50;
+val gCellLen = 50;
+val gBorderLen = 2;
+val gFullCellLen = gCellLen + gBorderLen;
+val gWindowLen = gPadding * 2 + gCellLen * rows + gBorderLen * (rows + 1);
 
 /**
  * Drawing area for GUI
@@ -39,22 +40,26 @@ public:
     void on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height)
     {
         // Calculate values
-        val xStart = padding;
-        val yStart = padding;
-        val fullWidth = (borderWidth + cellLen) * rows;
+        val xStart = gPadding;
+        val yStart = gPadding;
+        val fullWidth = gFullCellLen * rows;
         val xEnd = xStart + fullWidth;
         val yEnd = yStart + fullWidth;
 
-        // Line settings
-        cr->set_line_width(borderWidth);
-
-        // Draw vertical
+        // Draw boarder lines
+        cr->set_line_width(gBorderLen);
         cr->set_source_rgb(0.8, 0.0, 0.0);
         for (int row = 0; row < rows + 1; ++row)
         {
-            val xPos = xStart + (borderWidth + cellLen) * row;
+            // Draw vertical
+            val xPos = xStart + gFullCellLen * row;
             cr->move_to(xPos, yStart);
             cr->line_to(xPos, yEnd);
+
+            // Draw horizontal
+            val yPos = yStart + gFullCellLen * row;
+            cr->move_to(xStart, yPos);
+            cr->line_to(xEnd, yPos);
         }
         cr->stroke();
     }
@@ -76,7 +81,7 @@ public:
     {
         // Window
         set_title("GUI");
-        set_default_size(length, length);
+        set_default_size(gWindowLen, gWindowLen);
 
         // Add drawing area
         set_child(drawingArea);
