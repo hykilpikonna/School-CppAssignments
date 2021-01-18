@@ -116,6 +116,16 @@ public:
                     cr->line_to(gxs[1], gys[0]);
                     cr->stroke();
                 }
+
+                // Player 2 (O)
+                if (v == 1)
+                {
+                    // Draw circle
+                    val half = gCellLen * 0.5;
+                    cr->arc(gx + half, gy + half, gP2Radius, 0.0, 2.0 * M_PI);
+                    cr->stroke();
+                }
+            }
         }
     }
 };

@@ -12,6 +12,7 @@ const auto gCellLen = 50;
 const auto gBorderLen = 2;
 const auto gFullCellLen = gCellLen + gBorderLen;
 const auto gWindowLen = gPadding * 2 + gCellLen * rows + gBorderLen * (rows + 1);
+const auto gP1Padding = 10;
 const auto gP2Radius = 15;
 
 #endif //SCHOOL_CPP_CONSTANTS_H
