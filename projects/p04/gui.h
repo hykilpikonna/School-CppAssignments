@@ -10,6 +10,8 @@
 #include "constants.h"
 #include "GameState.h"
 
+#define CContext const Cairo::RefPtr<Cairo::Context>&
+
 using namespace Gtk;
 
 /**
@@ -26,7 +28,7 @@ public:
     MyArea()
     {
         // Set draw callback function
-        set_draw_func(sigc::mem_fun(*this, &MyArea::on_draw));
+        set_draw_func(sigc::mem_fun(*this, &MyArea::draw));
 
         // Mouse
         val controller = GestureClick::create();
@@ -68,7 +70,7 @@ public:
     /**
      * Draw GUI
      */
-    void on_draw(const Cairo::RefPtr<Cairo::Context>& cr, int width, int height)
+    void draw(CContext cr, int width, int height)
     {
         // Calculate values
         val xStart = gPadding;
@@ -126,12 +128,56 @@ public:
                 if (v == 1)
                 {
                     // Draw circle
+                    // https://developer.gnome.org/gtkmm-tutorial/stable/sec-cairo-drawing-arcs.html.en
                     val half = gCellLen * 0.5;
                     cr->arc(gx + half, gy + half, gP2Radius, 0.0, 2.0 * M_PI);
                     cr->stroke();
                 }
             }
         }
+
+        // Draw texts
+        drawText(cr, fullWidth, 20, "Hi", false);
+    }
+
+    /**
+     * Draw text
+     * https://developer.gnome.org/gtkmm-tutorial/stable/sec-drawing-text.html.en
+     *
+     * @param cr Context
+     * @param w Width
+     * @param h Height
+     * @param text Text to be displayed
+     * @param center Center text or not
+     */
+    void drawText(CContext cr, int w, int h, const string& text, bool center = false)
+    {
+        // Create font
+        // http://developer.gnome.org/pangomm/unstable/classPango_1_1FontDescription.html
+        Pango::FontDescription font;
+        font.set_family("Helvetica");
+        font.set_weight(Pango::Weight::BOLD);
+
+        // Create text layout
+        // http://developer.gnome.org/pangomm/unstable/classPango_1_1Layout.html
+        auto layout = create_pango_layout(text);
+        layout->set_font_description(font);
+
+        // Center text
+        if (center)
+        {
+            int tw;
+            int th;
+
+            // Get text dimensions
+            layout->get_pixel_size(tw, th);
+
+            // Position the text in the middle
+            cr->move_to((w - tw) / 2.0, (h - th) / 2.0);
+        }
+
+        // Show text
+        layout->show_in_cairo_context(cr);
     }
 };
 
