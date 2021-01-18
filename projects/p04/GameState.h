@@ -34,7 +34,6 @@ class GameState
 {
 public:
     array<int, rows * rows> grid{};
-    List<Player> players;
     int currentPlayer = 0;
 
     /**

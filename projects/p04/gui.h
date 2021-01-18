@@ -25,7 +25,7 @@ public:
     /**
      * Constructor
      */
-    MyArea()
+    explicit MyArea(GameState& game): game(game)
     {
         set_size_request(gWindowLen, gWindowLen);
 
@@ -38,7 +38,6 @@ public:
         add_controller(controller);
 
     }
-    ~MyArea() override = default;
 
     /**
      * Called whenever the mouse clicks the drawing area
@@ -189,20 +188,29 @@ public:
 class MyWindow: public Window
 {
 public:
-    // Initialize drawing area
+    // Game
+    GameState game;
+
+    // UI Components
+    Box box;
     MyArea drawingArea;
+    Button buttonTest;
 
     /**
      * Constructor
      */
-    MyWindow()
+    MyWindow(): drawingArea(game), box(Orientation::VERTICAL, 10), buttonTest("Test")
     {
         // Window
         set_title("GUI");
         set_default_size(gWindowLen, gWindowLen);
 
-        // Add drawing area
-        set_child(drawingArea);
+        // Layout container box
+        set_child(box);
+
+        // Add Components
+        box.append(drawingArea);
+        box.append(buttonTest);
     }
     ~MyWindow() override = default;
 };
