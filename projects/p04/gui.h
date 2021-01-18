@@ -136,49 +136,6 @@ public:
                 }
             }
         }
-
-        // Draw texts
-        drawText(cr, fullWidth, 20, "Hi", false);
-    }
-
-    /**
-     * Draw text
-     * https://developer.gnome.org/gtkmm-tutorial/stable/sec-drawing-text.html.en
-     *
-     * @param cr Context
-     * @param w Width
-     * @param h Height
-     * @param text Text to be displayed
-     * @param center Center text or not
-     */
-    void drawText(CContext cr, int w, int h, const string& text, bool center = false)
-    {
-        // Create font
-        // http://developer.gnome.org/pangomm/unstable/classPango_1_1FontDescription.html
-        Pango::FontDescription font;
-        font.set_family("Helvetica");
-        font.set_weight(Pango::Weight::BOLD);
-
-        // Create text layout
-        // http://developer.gnome.org/pangomm/unstable/classPango_1_1Layout.html
-        auto layout = create_pango_layout(text);
-        layout->set_font_description(font);
-
-        // Center text
-        if (center)
-        {
-            int tw;
-            int th;
-
-            // Get text dimensions
-            layout->get_pixel_size(tw, th);
-
-            // Position the text in the middle
-            cr->move_to((w - tw) / 2.0, (h - th) / 2.0);
-        }
-
-        // Show text
-        layout->show_in_cairo_context(cr);
     }
 };
 
