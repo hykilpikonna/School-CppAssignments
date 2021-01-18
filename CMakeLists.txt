@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 project(homeworks)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 # find_package(ArrayFire)
 # add_executable(arrayfire projects/p02-conway-arrayfire/conwayaf.cpp)
 
@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD 14)
 
 # Use the package PkgConfig to detect GTK+ headers/library files
 FIND_PACKAGE(PkgConfig REQUIRED)
-PKG_CHECK_MODULES(GTK REQUIRED gtkmm-3.0)
+PKG_CHECK_MODULES(GTK REQUIRED gtkmm-4.0)
 
 # Setup CMake to use GTK+, tell the compiler where to look for headers
 # and to the linker where to look for libraries
@@ -22,7 +22,7 @@ LINK_DIRECTORIES(${GTK_LIBRARY_DIRS})
 # Add other flags to the compiler
 ADD_DEFINITIONS(${GTK_CFLAGS_OTHER})
 
-add_executable(p04 projects/p04/main.cpp projects/p04/main.h projects/p04/Window.cpp projects/p04/Window.h)
+add_executable(p04 projects/p04/main.cpp projects/p04/gui.h)
 TARGET_LINK_LIBRARIES(p04 ${GTK_LIBRARIES})
 
 add_executable(homeworks homeworks/b018-random-toss.cpp)

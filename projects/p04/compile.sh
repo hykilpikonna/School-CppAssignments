@@ -1,2 +1,4 @@
-# brew install gtk+3 gtkmm3
-g++ `pkg-config --cflags --libs gtkmm-3.0` -c Run.cpp -o a.bin -std=c++17
+# brew install gtkmm4
+g++ main.cpp -o output `pkg-config gtkmm-4.0 --cflags --libs` -std=c++2a
+chmod +x output
+./output
