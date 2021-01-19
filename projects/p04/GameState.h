@@ -106,11 +106,7 @@ public:
 
         var move = -1;
         if (difficulty == 0) move = aiMove0();
-        if (difficulty == 1)
-        {
-            move = aiMove1(aiPlayer);
-            if (move == -1) move = aiMove0();
-        }
+        if (difficulty == 1) move = aiMove1();
 
         // Make the move
         grid[move] = currentPlayer;
@@ -134,18 +130,16 @@ public:
     }
 
     /**
-     * Normal AI: Blocks opponent wins and go for winning moves
-     *
-     * @returns Blocking move or winning move, or otherwise returns -1
+     * Normal AI: Blocks opponent wins and go for winning moves but moves random otherwise
      */
-    int aiMove1(int p)
+    int aiMove1()
     {
         // If the AI Player is 0 (X), then two 1s (O) would be dangerous
         // Two 1s have a value of 2, so the total sum would be 2 + NO_CELL, which is -48.
         // If the AI Player is 1 (O), then two 0s (X) would be dangerous
         // Two 0s have a value of 0, so the total sum would be NO_CELL, which is -50.
-        val dangerousSum = p == 0 ? 2 + NO_CELL : NO_CELL;
-        val winningSum = p == 0 ? NO_CELL : 2 + NO_CELL;
+        val dangerousSum = aiPlayer == 0 ? 2 + NO_CELL : NO_CELL;
+        val winningSum = aiPlayer == 0 ? NO_CELL : 2 + NO_CELL;
 
         // Temp variables
         var blockingMove = -1;
@@ -184,8 +178,8 @@ public:
             return blockingMove;
         }
 
-        // No combo found
-        return -1;
+        // No dangerous combo found
+        return aiMove0();
     }
 };
 

@@ -80,6 +80,7 @@ public:
      */
     void draw(CContext cr, int width, int height) const
     {
+
         // Draw win if game is won
         {
             val [result, combo] = game->checkResult();
