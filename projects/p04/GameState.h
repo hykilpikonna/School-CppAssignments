@@ -161,8 +161,10 @@ public:
                 log("[AI] Blocking/Winning move.");
 
                 // Find the empty spot to block this dangerous combo
-                for (int i = 0; i < 3; ++i)
-                    if (grid[combo[i]] == NO_CELL) return combo[i];
+                for (int loc : combo)
+                {
+                    if (grid[loc] == NO_CELL) return loc;
+                }
             }
         }
 
