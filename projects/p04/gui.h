@@ -262,7 +262,7 @@ public:
      */
     void _onClickNewGameAI(int whoStart)
     {
-        if (!(whoStart == 1 || whoStart == 2)) return;
+        if (!(whoStart == 0 || whoStart == 1)) return;
         dialog->hide();
 
         // Start game
