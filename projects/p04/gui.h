@@ -243,8 +243,8 @@ public:
     void updateStats()
     {
         String texts[]{"Now it's player " + str(game.currentPlayer + 1) + "'s turn!",
-                       "Game ended, player 1 won!",
-                       "Game ended, player 2 won!",
+                       "Game ended, " + (game.aiMode && game.aiPlayer == 0 ? string("AI") : "player 1") + " won!",
+                       "Game ended, " + (game.aiMode && game.aiPlayer == 1 ? string("AI") : "player 2") + " won!",
                        "Game ended, it's a draw!"};
 
         val result = get<0>(game.checkResult());
