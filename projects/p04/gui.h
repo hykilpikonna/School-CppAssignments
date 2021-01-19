@@ -180,6 +180,7 @@ public:
     void onClickNewGame()
     {
         game = GameState();
+        renderer.game = game;
         renderer.queue_draw();
     }
 };
