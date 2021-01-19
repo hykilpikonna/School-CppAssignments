@@ -63,7 +63,7 @@ public:
         log("Pressed cell is: " << loc);
 
         // Check if location already has something
-        if (game->grid[loc] != -1) return;
+        if (game->grid[loc] != NO_CELL) return;
 
         // Click for player
         game->movePlayer(cellX, cellY);
@@ -76,7 +76,7 @@ public:
     /**
      * Draw GUI
      */
-    void draw(CContext cr, int width, int height)
+    void draw(CContext cr, int width, int height) const
     {
         // Calculate values
         val xStart = gPadding;
@@ -193,6 +193,7 @@ public:
     {
         game = GameState();
         renderer.queue_draw();
+        updateStats();
     }
 
     /**

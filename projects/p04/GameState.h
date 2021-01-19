@@ -18,6 +18,7 @@ List<List<Int>> combos = {
         // Diagonal
         {0, 4, 8}, {2, 4, 6}
 };
+val NO_CELL = -50;
 
 /**
  * Player interface
@@ -42,7 +43,7 @@ public:
     GameState()
     {
         // Init grid (-1: No one placed anything here yet)
-        for (int& n : grid) { n = -1; }
+        for (int& n : grid) { n = NO_CELL; }
     }
 
     /**
@@ -67,12 +68,6 @@ public:
      */
     int checkResult()
     {
-        // Check if all grid cells are filled TODO: Predict draws
-        for (int n : grid)
-        {
-            if (n == -1) return -1; // No results yet
-        }
-
         // Check winning combos
         for (List<Int> combo : combos)
         {
@@ -81,6 +76,11 @@ public:
             if (sum == 3) return 1; // Player 2 wins
         }
 
+        // Check if all grid cells are filled TODO: Predict draws
+        for (int n : grid)
+        {
+            if (n == NO_CELL) return -1; // No results yet
+        }
         return 2; // Draws
     }
 };
