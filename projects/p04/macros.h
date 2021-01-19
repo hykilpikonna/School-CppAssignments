@@ -35,6 +35,7 @@ using namespace std;
 
 // Convenient things
 #define log(msg)(cout << msg << endl)
+#define str(x)(to_string(x))
 
 // Colors
 val darkColor = "\x1b[48;5;0m\x1b[38;5;11m";
