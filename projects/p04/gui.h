@@ -22,7 +22,7 @@ using namespace Gtk;
 class MyRenderer: public DrawingArea
 {
 public:
-    GameState game;
+    GameState* game;
 
     // Update callback function (https://stackoverflow.com/questions/2298242/callback-functions-in-c)
     function<void()> updateCallback;
@@ -30,7 +30,7 @@ public:
     /**
      * Constructor
      */
-    explicit MyRenderer(GameState& game, function<void()> updateCallback): game(game), updateCallback(std::move(updateCallback))
+    explicit MyRenderer(GameState* game, function<void()> updateCallback): game(game), updateCallback(std::move(updateCallback))
     {
         set_size_request(gWindowLen, gWindowLen);
 
@@ -63,10 +63,10 @@ public:
         log("Pressed cell is: " << loc);
 
         // Check if location already has something
-        if (game.grid[loc] != -1) return;
+        if (game->grid[loc] != -1) return;
 
         // Click for player
-        game.movePlayer(cellX, cellY);
+        game->movePlayer(cellX, cellY);
 
         // Refresh UI
         queue_draw();
@@ -108,7 +108,7 @@ public:
         {
             for (int y = 0; y < rows; ++y)
             {
-                val v = game.grid[xyToLoc(x, y)];
+                val v = game->grid[xyToLoc(x, y)];
 
                 // Calculate cell graphics location
                 val gs = gPadding + gBorderLen;
@@ -164,7 +164,7 @@ public:
      */
     MyWindow(): box(Orientation::VERTICAL, 10),
                 // Update window when game updates (Lambda: https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp)
-                renderer(game, [this](){ updateStats(); }),
+                renderer(&game, [this](){ updateStats(); }),
                 bNewGame("New Game vs Player")
     {
         // Window
@@ -192,7 +192,6 @@ public:
     void onClickNewGame()
     {
         game = GameState();
-        renderer.game = game;
         renderer.queue_draw();
     }
 
@@ -205,7 +204,7 @@ public:
                        "Game ended, player 1 won!",
                        "Game ended, player 2 won!",
                        "Game ended, it's a draw!"};
-        
+
         val result = game.checkResult();
         lStatus.set_label(texts[result + 1]);
     }
