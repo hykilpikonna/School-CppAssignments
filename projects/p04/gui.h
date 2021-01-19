@@ -83,6 +83,27 @@ public:
     void draw(CContext cr, int width, int height) const
     {
 
+        // Draw win if game is won
+        {
+            val [result, combo] = game->checkResult();
+
+            // If a player is won (not draw)
+            if (result == 0 || result == 1)
+            {
+                // Calculate values
+                val start = gPadding + gBorderLen;
+
+                // Draw green squares
+                cr->set_source_rgb(.76, 1, .44);
+                for (Int loc: combo)
+                {
+                    val [x, y] = locToXy(loc);
+                    cr->rectangle(start + gFullCellLen * x, start + gFullCellLen * y, gFullCellLen, gFullCellLen);
+                    cr->fill();
+                }
+            }
+        }
+
         // Draw boarder lines
         {
             // Calculate values
