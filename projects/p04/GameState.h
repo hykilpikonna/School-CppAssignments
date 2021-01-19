@@ -21,14 +21,6 @@ List<List<Int>> combos = {
 val NO_CELL = -50;
 
 /**
- * Player interface
- */
-class Player
-{
-    virtual int move() = 0;
-};
-
-/**
  * Class storing the current game state
  */
 class GameState
