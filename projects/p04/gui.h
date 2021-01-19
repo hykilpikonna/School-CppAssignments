@@ -171,6 +171,8 @@ public:
 
         // Register events
         bNewGame.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::onClickNewGame)));
+
+        updateStats();
     }
     ~MyWindow() override = default;
 
@@ -182,6 +184,20 @@ public:
         game = GameState();
         renderer.game = game;
         renderer.queue_draw();
+    }
+
+    /**
+     * Update status text
+     */
+    void updateStats()
+    {
+        String texts[]{"Now it's player " + str(game.currentPlayer + 1) + "'s turn!",
+                       "Game ended, player 1 won!",
+                       "Game ended, player 2 won!",
+                       "Game ended, it's a draw!"};
+        
+        val result = game.checkResult();
+        lStatus.set_label(texts[result + 1]);
     }
 };
 
