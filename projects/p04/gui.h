@@ -5,6 +5,8 @@
 #ifndef HOMEWORKS_WINDOW_H
 #define HOMEWORKS_WINDOW_H
 
+#include <utility>
+
 #include "gtkmm.h"
 #include "macros.h"
 #include "constants.h"
@@ -17,26 +19,28 @@ using namespace Gtk;
 /**
  * Drawing area for GUI
  */
-class MyArea: public DrawingArea
+class MyRenderer: public DrawingArea
 {
 public:
     GameState game;
 
+    // Update callback function (https://stackoverflow.com/questions/2298242/callback-functions-in-c)
+    function<void()> updateCallback;
+
     /**
      * Constructor
      */
-    explicit MyArea(GameState& game): game(game)
+    explicit MyRenderer(GameState& game, function<void()> updateCallback): game(game), updateCallback(std::move(updateCallback))
     {
         set_size_request(gWindowLen, gWindowLen);
 
         // Set draw callback function
-        set_draw_func(sigc::mem_fun(*this, &MyArea::draw));
+        set_draw_func(sigc::mem_fun(*this, &MyRenderer::draw));
 
         // Mouse
         val controller = GestureClick::create();
-        controller->signal_released().connect(sigc::bind(sigc::mem_fun(*this, &MyArea::pressed)), false);
+        controller->signal_released().connect(sigc::bind(sigc::mem_fun(*this, &MyRenderer::pressed)), false);
         add_controller(controller);
-
     }
 
     /**
@@ -66,6 +70,7 @@ public:
 
         // Refresh UI
         queue_draw();
+        updateCallback();
     }
 
     /**
@@ -150,13 +155,17 @@ public:
 
     // UI Components
     Box box;
-    MyArea renderer;
+    MyRenderer renderer;
+    Label lStatus;
     Button bNewGame;
 
     /**
      * Constructor
      */
-    MyWindow(): renderer(game), box(Orientation::VERTICAL, 10), bNewGame("New Game vs Player")
+    MyWindow(): box(Orientation::VERTICAL, 10),
+                // Update window when game updates (Lambda: https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp)
+                renderer(game, [this](){ updateStats(); }),
+                bNewGame("New Game vs Player")
     {
         // Window
         set_title("GUI");
@@ -167,6 +176,7 @@ public:
 
         // Add Components
         box.append(renderer);
+        box.append(lStatus);
         box.append(bNewGame);
 
         // Register events
