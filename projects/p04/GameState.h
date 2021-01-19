@@ -9,6 +9,8 @@
 #include "macros.h"
 #include "utils.h"
 
+#define Grid array<int, rows * rows>
+
 // Winning combos
 List<List<Int>> combos = {
         // Horizontal
@@ -26,7 +28,7 @@ val NO_CELL = -50;
 class GameState
 {
 public:
-    array<int, rows * rows> grid{};
+    Grid grid{};
     int currentPlayer = 0;
     bool aiMode;
     int aiDifficulty;
@@ -105,11 +107,11 @@ public:
         if (isFilled()) return -1;
 
         var move = -1;
-        if (difficulty == 0) move = aiMove0();
+        if (difficulty == 0) move = aiMove0(grid);
         if (difficulty == 1)
         {
-            move = aiMove1(aiPlayer);
-            if (move == -1) move = aiMove0();
+            move = aiMove1(grid, aiPlayer);
+            if (move == -1) move = aiMove0(grid);
         }
 
         // Make the move
@@ -123,7 +125,7 @@ public:
      *
      * @return A random move
      */
-    int aiMove0()
+    static int aiMove0(Grid grid)
     {
         log("[AI] Random move.");
         while (true)
@@ -138,14 +140,14 @@ public:
      *
      * @returns Blocking move or winning move, or otherwise returns -1
      */
-    int aiMove1(int p)
+    static int aiMove1(Grid grid, int aiPlayer)
     {
         // If the AI Player is 0 (X), then two 1s (O) would be dangerous
         // Two 1s have a value of 2, so the total sum would be 2 + NO_CELL, which is -48.
         // If the AI Player is 1 (O), then two 0s (X) would be dangerous
         // Two 0s have a value of 0, so the total sum would be NO_CELL, which is -50.
-        val dangerousSum = p == 0 ? 2 + NO_CELL : NO_CELL;
-        val winningSum = p == 0 ? NO_CELL : 2 + NO_CELL;
+        val dangerousSum = aiPlayer == 0 ? 2 + NO_CELL : NO_CELL;
+        val winningSum = aiPlayer == 0 ? NO_CELL : 2 + NO_CELL;
 
         // Temp variables
         var blockingMove = -1;
