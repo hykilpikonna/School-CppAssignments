@@ -251,6 +251,7 @@ public:
         dialog->add_button("Me", 0);
         dialog->add_button("AI", 1);
         dialog->signal_response().connect(sigc::bind(mem_fun(*this, &MyWindow::_onClickNewGameAI)));
+        dialog->get_content_area()->set_margin(20);
         dialog->show();
 
         game = GameState(true);
