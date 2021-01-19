@@ -5,6 +5,7 @@
 #ifndef HOMEWORKS_WINDOW_H
 #define HOMEWORKS_WINDOW_H
 
+#include <memory>
 #include <utility>
 
 #include "gtkmm.h"
@@ -186,6 +187,7 @@ public:
     Button bNewGame;
     Button bNewGameAI;
     Scale sAiDifficulty;
+    std::unique_ptr<Gtk::MessageDialog> dialog;
 
     /**
      * Constructor
@@ -241,6 +243,12 @@ public:
      */
     void onClickNewGameAI()
     {
+        // Show dialog to let the player choose who goes first
+        // https://developer.gnome.org/gtkmm-tutorial/stable/sec-dialogs-messagedialog.html.en
+        dialog = std::make_unique<MessageDialog>(*this, "Who goes first?", false, MessageType::QUESTION, ButtonsType::NONE, true);
+        dialog->set_secondary_text("And this is the secondary text that explains things.");
+        dialog->show();
+
         game = GameState(true);
         renderer.queue_draw();
         updateStats();
