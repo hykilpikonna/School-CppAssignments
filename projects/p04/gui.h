@@ -52,6 +52,8 @@ public:
      */
     void pressed(int _, double x, double y)
     {
+        // Ignore if game ended (Tuple: https://en.cppreference.com/w/cpp/utility/tuple)
+        if (get<0>(game->checkResult()) != -1) return;
 
         // Calculate which cell did the user press
         if (x < gPadding || y < gPadding) return; // Out of bounds
