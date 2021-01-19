@@ -28,6 +28,8 @@ class GameState
 public:
     array<int, rows * rows> grid{};
     int currentPlayer = 0;
+    bool aiMode = false;
+    int aiDifficulty = 0;
 
     /**
      * Constructor
@@ -51,6 +53,12 @@ public:
 
         // To next player
         currentPlayer = (currentPlayer + 1) % 2;
+
+        // Move AI
+        if (aiMode)
+        {
+            aiMove(aiDifficulty);
+        }
     }
 
     /**
