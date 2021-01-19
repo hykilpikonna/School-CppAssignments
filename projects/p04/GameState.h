@@ -112,6 +112,10 @@ public:
         {
             move = aiMove0();
         }
+        if (difficulty == 1)
+        {
+            move = aiMove1();
+        }
 
         // Make the move
         grid[move] = currentPlayer;
@@ -131,6 +135,37 @@ public:
             val loc = rand() % (rows * rows);
             if (grid[loc] == NO_CELL) return loc;
         }
+    }
+
+    /**
+     * Normal AI: Blocks opponent wins but moves random otherwise
+     *
+     * @return
+     */
+    int aiMove1()
+    {
+        // If the AI Player is 0 (X), then two 1s (O) would be dangerous
+        // Two 1s have a value of 2, so the total sum would be 2 + NO_CELL, which is -48.
+        // If the AI Player is 1 (O), then two 0s (X) would be dangerous
+        // Two 0s have a value of 0, so the total sum would be NO_CELL, which is -50.
+        val dangerousSum = aiPlayer == 0 ? 2 + NO_CELL : NO_CELL;
+
+        // Find dangerous combos
+        for (List<Int> combo : combos)
+        {
+            val sum = grid[combo[0]] + grid[combo[1]] + grid[combo[2]];
+
+            // Found dangerous combo
+            if (sum == dangerousSum)
+            {
+                // Find the empty spot to block this dangerous combo
+                for (int i = 0; i < 3; ++i)
+                    if (grid[combo[i]] == NO_CELL) return combo[i];
+            }
+        }
+
+        // No dangerous combo found
+        return aiMove0();
     }
 };
 
