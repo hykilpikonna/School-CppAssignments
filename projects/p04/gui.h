@@ -185,7 +185,6 @@ public:
     Label lStatus;
     Button bNewGame;
     Button bNewGameAI;
-    Label lAiDifficulty;
     Scale sAiDifficulty;
 
     /**
@@ -210,8 +209,9 @@ public:
         box.append(lStatus);
         box.append(bNewGame);
         box.append(bNewGameAI);
-        box.append(lAiDifficulty);
         box.append(sAiDifficulty);
+
+        // Slider settings
         sAiDifficulty.set_range(0, 2);
         sAiDifficulty.set_round_digits(0);
         sAiDifficulty.set_increments(1, 1);
@@ -246,13 +246,16 @@ public:
         updateStats();
     }
 
+    /**
+     * Called when the AI difficulty slider change
+     */
     void onAiDifficultySliderChange()
     {
-        String difficulties[]{"0. \"Ponkotsu AI\"",
-                              "1. Normal AI",
-                              "2. Perfect AI"};
+        String difficulties[]{"Lv 0 - \"Ponkotsu AI\"",
+                              "Lv 1 - Normal AI",
+                              "Lv ∞ - Perfect AI"};
 
-        lAiDifficulty.set_label("AI Difficulty: " + difficulties[(int) round(sAiDifficulty.get_value())]);
+        bNewGameAI.set_label("New Game vs " + difficulties[(int) round(sAiDifficulty.get_value())]);
     }
 
     /**
