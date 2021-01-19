@@ -65,23 +65,24 @@ public:
      * Check who won, or draw
      *
      * @return Game result [-1: there's no result yet, 0: player 1 wins, 1: payer 2 wins, 2: draw)
+     *         And the combo
      */
-    int checkResult()
+    tuple<int, List<Int>> checkResult()
     {
         // Check winning combos
         for (List<Int> combo : combos)
         {
             val sum = grid[combo[0]] + grid[combo[1]] + grid[combo[2]];
-            if (sum == 0) return 0; // Player 1 wins
-            if (sum == 3) return 1; // Player 2 wins
+            if (sum == 0) return {0, combo}; // Player 1 wins
+            if (sum == 3) return {1, combo}; // Player 2 wins
         }
 
         // Check if all grid cells are filled TODO: Predict draws
         for (int n : grid)
         {
-            if (n == NO_CELL) return -1; // No results yet
+            if (n == NO_CELL) return {-1, {}}; // No results yet
         }
-        return 2; // Draws
+        return {2, {}}; // Draws
     }
 };
 

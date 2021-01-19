@@ -22,6 +22,7 @@ using namespace Gtk;
 class MyRenderer: public DrawingArea
 {
 public:
+    // Use pointers to sync it with the window's game object (https://www.cplusplus.com/doc/tutorial/pointers/)
     GameState* game;
 
     // Update callback function (https://stackoverflow.com/questions/2298242/callback-functions-in-c)
@@ -51,7 +52,6 @@ public:
      */
     void pressed(int _, double x, double y)
     {
-        log("Pressed: " << x << ", " << y);
 
         // Calculate which cell did the user press
         if (x < gPadding || y < gPadding) return; // Out of bounds
@@ -60,6 +60,8 @@ public:
         if (cellX >= rows || cellY >= rows) return; // Out of bounds
         val loc = xyToLoc(cellX, cellY);
 
+        // Debug log
+        log("Pressed: " << x << ", " << y);
         log("Pressed cell is: " << loc);
 
         // Check if location already has something
@@ -206,7 +208,7 @@ public:
                        "Game ended, player 2 won!",
                        "Game ended, it's a draw!"};
 
-        val result = game.checkResult();
+        val result = get<0>(game.checkResult());
         lStatus.set_label(texts[result + 1]);
     }
 };
