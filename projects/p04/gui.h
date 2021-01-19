@@ -200,7 +200,7 @@ public:
                 bNewGameAI("New Game vs \"Ponkotsu AI\"")
     {
         // Window
-        set_title("GUI");
+        set_title("TicTacToe");
         set_default_size(gWindowLen, gWindowLen);
 
         // Layout container box
@@ -253,10 +253,6 @@ public:
         dialog->signal_response().connect(sigc::bind(mem_fun(*this, &MyWindow::_onClickNewGameAI)));
         dialog->get_content_area()->set_margin(20);
         dialog->show();
-
-        game = GameState(true);
-        renderer.queue_draw();
-        updateStats();
     }
 
     /**
@@ -267,8 +263,12 @@ public:
     void _onClickNewGameAI(int whoStart)
     {
         if (!(whoStart == 1 || whoStart == 2)) return;
-
         dialog->hide();
+
+        // Start game
+        game = GameState(true, (int) round(sAiDifficulty.get_value()), !(bool) whoStart);
+        renderer.queue_draw();
+        updateStats();
         log("Dialog Clicked " << whoStart);
     }
 
