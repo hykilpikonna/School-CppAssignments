@@ -225,6 +225,9 @@ public:
                     maxScore = score;
                     maxMove = move;
                 }
+
+                // Win, just return it
+                if (score == 100) return {move, score};
             }
         }
 
