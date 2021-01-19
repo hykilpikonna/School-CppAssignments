@@ -28,16 +28,23 @@ class GameState
 public:
     array<int, rows * rows> grid{};
     int currentPlayer = 0;
-    bool aiMode = false;
-    int aiDifficulty = 0;
+    bool aiMode;
+    int aiDifficulty;
+    int aiPlayer;
 
     /**
      * Constructor
      */
-    GameState()
+    explicit GameState(bool aiMode = false, int aiDifficulty = 0, int aiPlayer = 1): aiMode(aiMode), aiDifficulty(aiDifficulty), aiPlayer(aiPlayer)
     {
         // Init grid (-1: No one placed anything here yet)
         for (int& n : grid) { n = NO_CELL; }
+
+        // AI initial move
+        if (aiMode && aiPlayer == 0)
+        {
+            aiMove(aiDifficulty);
+        }
     }
 
     /**
