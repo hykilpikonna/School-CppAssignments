@@ -64,10 +64,6 @@ public:
         if (cellX >= rows || cellY >= rows) return; // Out of bounds
         val loc = xyToLoc(cellX, cellY);
 
-        // Debug log
-        log("Pressed: " << x << ", " << y);
-        log("Pressed cell is: " << loc);
-
         // Check if location already has something
         if (game->grid[loc] != NO_CELL) return;
 
@@ -269,7 +265,6 @@ public:
         game = GameState(true, (int) round(sAiDifficulty.get_value()), !(bool) whoStart);
         renderer.queue_draw();
         updateStats();
-        log("Dialog Clicked " << whoStart);
     }
 
     /**
