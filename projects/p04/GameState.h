@@ -147,10 +147,14 @@ public:
         // Two 1s have a value of 2, so the total sum would be 2 + NO_CELL, which is -48.
         // If the AI Player is 1 (O), then two 0s (X) would be dangerous
         // Two 0s have a value of 0, so the total sum would be NO_CELL, which is -50.
-        val dangerousSum = 2 + NO_CELL;
-        val winningSum = NO_CELL;
+        val dangerousSum = aiPlayer == 0 ? 2 + NO_CELL : NO_CELL;
+        val winningSum = aiPlayer == 0 ? NO_CELL : 2 + NO_CELL;
 
-        // Find dangerous combos
+        // Temp variables
+        var blockingMove = -1;
+        var winningMove = -1;
+
+        // Find blocking/winning combos
         for (List<Int> combo : combos)
         {
             val sum = grid[combo[0]] + grid[combo[1]] + grid[combo[2]];
@@ -163,10 +167,19 @@ public:
                 // Find the empty spot to block this dangerous combo
                 for (int loc : combo)
                 {
-                    if (grid[loc] == NO_CELL) return loc;
+                    if (grid[loc] == NO_CELL)
+                    {
+                        if (sum == dangerousSum) blockingMove = loc;
+                        else winningMove = loc;
+                        break;
+                    }
                 }
             }
         }
+
+        // Winning move first, then blocking move
+        if (winningMove != -1) return winningMove;
+        if (blockingMove != -1) return blockingMove;
 
         // No dangerous combo found
         return aiMove0();
