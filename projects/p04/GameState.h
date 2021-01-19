@@ -59,7 +59,7 @@ public:
         grid[xyToLoc(x, y)] = currentPlayer;
 
         // To next player
-        currentPlayer = (currentPlayer + 1) % 2;
+        currentPlayer = !currentPlayer;
 
         // Move AI if game hasn't ended
         if (get<0>(checkResult()) == -1 && aiMode) aiMove(aiDifficulty);
@@ -107,10 +107,11 @@ public:
         var move = -1;
         if (difficulty == 0) move = aiMove0();
         if (difficulty == 1) move = aiMove1();
+        if (difficulty == 2) move = get<0>(aiMove2(aiPlayer));
 
         // Make the move
         grid[move] = currentPlayer;
-        currentPlayer = (currentPlayer + 1) % 2;
+        currentPlayer = !currentPlayer;
         return move;
     }
 
@@ -180,6 +181,54 @@ public:
 
         // No dangerous combo found
         return aiMove0();
+    }
+
+    /**
+     * Perfect AI using Minimax algorithm
+     *
+     * @param aiPlayer Current move player for simulation
+     * @return The first value is the move location, and the second value is the absolute score for the move.
+     */
+    tuple<int, int> aiMove2(int aiPlayer)
+    {
+        // If the game is won/lost/draw
+        val [result, _] = checkResult();
+        if (result != -1)
+        {
+            // Draw
+            if (result == 2) return {-1, 0};
+
+            // Won/Lost
+            return {-1, result == aiPlayer ? 100 : -100};
+        }
+
+        // Loop through possible moves
+        var maxScore = -1000;
+        var maxMove = -1;
+        for (int move = 0; move < rows * rows; move++)
+        {
+            // Possible move
+            if (grid[move] == NO_CELL)
+            {
+                // Simulate move
+                grid[move] = aiPlayer;
+
+                // Get next step score
+                val score = -get<1>(aiMove2(!aiPlayer));
+
+                // Clean up simulation
+                grid[move] = NO_CELL;
+
+                // New max found
+                if (score > maxScore)
+                {
+                    maxScore = score;
+                    maxMove = move;
+                }
+            }
+        }
+
+        return {maxMove, maxScore};
     }
 };
 
