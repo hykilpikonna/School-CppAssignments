@@ -185,6 +185,8 @@ public:
     Label lStatus;
     Button bNewGame;
     Button bNewGameAI;
+    Label lAiDifficulty;
+    Scale sAiDifficulty;
 
     /**
      * Constructor
@@ -208,12 +210,16 @@ public:
         box.append(lStatus);
         box.append(bNewGame);
         box.append(bNewGameAI);
+        box.append(lAiDifficulty);
+        box.append(sAiDifficulty);
 
         // Register events
         bNewGame.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::onClickNewGame)));
         bNewGameAI.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::onClickNewGameAI)));
+        sAiDifficulty.signal_value_changed().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::onAiDifficultySliderChange)));
 
         updateStats();
+        onAiDifficultySliderChange();
     }
     ~MyWindow() override = default;
 
@@ -235,6 +241,15 @@ public:
         game = GameState(true);
         renderer.queue_draw();
         updateStats();
+    }
+
+    void onAiDifficultySliderChange()
+    {
+        String difficulties[]{"0. \"Ponkotsu AI\"",
+                              "1. Normal AI",
+                              "2. Perfect AI"};
+
+        lAiDifficulty.set_label("AI Difficulty: " + difficulties[(int) round(sAiDifficulty.get_value())]);
     }
 
     /**
