@@ -69,12 +69,16 @@ public:
             if (sum == 3) return {1, combo}; // Player 2 wins
         }
 
-        // Check if all grid cells are filled TODO: Predict draws
-        for (int n : grid)
-        {
-            if (n == NO_CELL) return {-1, {}}; // No results yet
-        }
-        return {2, {}}; // Draws
+        // TODO: Predict draws
+        return {isFilled() ? 2 : -1, {}};
+    }
+
+    /**
+     * Check if all grid cells are filled
+     */
+    bool isFilled()
+    {
+        return all_of(grid.begin(), grid.end(), [](int cell){ return cell != NO_CELL; });
     }
 };
 
