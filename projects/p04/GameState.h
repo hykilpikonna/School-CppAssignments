@@ -80,6 +80,43 @@ public:
     {
         return all_of(grid.begin(), grid.end(), [](int cell){ return cell != NO_CELL; });
     }
+
+    /**
+     * Let AI make a move
+     *
+     * @param difficulty Difficulty of the AI
+     * @return AI move location
+     */
+    int aiMove(int difficulty)
+    {
+        // Prevent endless loops
+        if (isFilled()) return -1;
+
+        var move = -1;
+        if (difficulty == 0)
+        {
+            move = aiMove0();
+        }
+
+        // Make the move
+        grid[move] = currentPlayer;
+        currentPlayer = (currentPlayer + 1) % 2;
+        return move;
+    }
+
+    /**
+     * "Ponkotsu AI"
+     *
+     * @return A random move
+     */
+    int aiMove0()
+    {
+        while (true)
+        {
+            val loc = rand() % (rows * rows);
+            if (grid[loc] == NO_CELL) return loc;
+        }
+    }
 };
 
 #endif //SCHOOL_CPP_GAMESTATE_H
