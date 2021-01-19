@@ -82,29 +82,30 @@ public:
      */
     void draw(CContext cr, int width, int height) const
     {
-        // Calculate values
-        val xStart = gPadding;
-        val yStart = gPadding;
-        val fullWidth = gFullCellLen * rows;
-        val xEnd = xStart + fullWidth;
-        val yEnd = yStart + fullWidth;
 
         // Draw boarder lines
-        cr->set_line_width(gBorderLen);
-        cr->set_source_rgb(0.8, 0.0, 0.0);
-        for (int row = 0; row < rows + 1; ++row)
         {
-            // Draw vertical
-            val xPos = xStart + gFullCellLen * row;
-            cr->move_to(xPos, yStart);
-            cr->line_to(xPos, yEnd);
+            // Calculate values
+            val fullWidth = gFullCellLen * rows;
+            val start = gPadding;
+            val end = gPadding + fullWidth;
 
-            // Draw horizontal
-            val yPos = yStart + gFullCellLen * row;
-            cr->move_to(xStart, yPos);
-            cr->line_to(xEnd, yPos);
+            cr->set_line_width(gBorderLen);
+            cr->set_source_rgb(0.8, 0.0, 0.0);
+            for (int row = 0; row < rows + 1; ++row)
+            {
+                // Draw vertical
+                val xPos = start + gFullCellLen * row;
+                cr->move_to(xPos, start);
+                cr->line_to(xPos, end);
+
+                // Draw horizontal
+                val yPos = start + gFullCellLen * row;
+                cr->move_to(start, yPos);
+                cr->line_to(end, yPos);
+            }
+            cr->stroke();
         }
-        cr->stroke();
 
         // Draw players
         cr->set_source_rgb(0.1, 0.1, 0.1);
