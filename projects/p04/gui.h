@@ -16,6 +16,7 @@
 #define CContext const Cairo::RefPtr<Cairo::Context>&
 
 using namespace Gtk;
+using namespace sigc;
 
 /**
  * Drawing area for GUI
@@ -219,9 +220,9 @@ public:
         sAiDifficulty.set_increments(1, 1);
 
         // Register events
-        bNewGame.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::onClickNewGame)));
-        bNewGameAI.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::onClickNewGameAI)));
-        sAiDifficulty.signal_value_changed().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::onAiDifficultySliderChange)));
+        bNewGame.signal_clicked().connect(sigc::bind(mem_fun(*this, &MyWindow::onClickNewGame)));
+        bNewGameAI.signal_clicked().connect(sigc::bind(mem_fun(*this, &MyWindow::onClickNewGameAI)));
+        sAiDifficulty.signal_value_changed().connect(sigc::bind(mem_fun(*this, &MyWindow::onAiDifficultySliderChange)));
 
         updateStats();
         onAiDifficultySliderChange();
@@ -247,11 +248,27 @@ public:
         // https://developer.gnome.org/gtkmm-tutorial/stable/sec-dialogs-messagedialog.html.en
         dialog = std::make_unique<MessageDialog>(*this, "Who goes first?", false, MessageType::QUESTION, ButtonsType::NONE, true);
         dialog->set_secondary_text("And this is the secondary text that explains things.");
+        dialog->add_button("Me", 0);
+        dialog->add_button("AI", 1);
+        dialog->signal_response().connect(sigc::bind(mem_fun(*this, &MyWindow::_onClickNewGameAI)));
         dialog->show();
 
         game = GameState(true);
         renderer.queue_draw();
         updateStats();
+    }
+
+    /**
+     * Called when the user confirmed who would start the game.
+     *
+     * @param whoStart 0: Player, 1: AI
+     */
+    void _onClickNewGameAI(int whoStart)
+    {
+        if (!(whoStart == 1 || whoStart == 2)) return;
+
+        dialog->hide();
+        log("Dialog Clicked " << whoStart);
     }
 
     /**
