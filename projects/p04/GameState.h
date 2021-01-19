@@ -61,11 +61,8 @@ public:
         // To next player
         currentPlayer = (currentPlayer + 1) % 2;
 
-        // Move AI
-        if (aiMode)
-        {
-            aiMove(aiDifficulty);
-        }
+        // Move AI if game hasn't ended
+        if (get<0>(checkResult()) == -1 && aiMode) aiMove(aiDifficulty);
     }
 
     /**
@@ -108,14 +105,8 @@ public:
         if (isFilled()) return -1;
 
         var move = -1;
-        if (difficulty == 0)
-        {
-            move = aiMove0();
-        }
-        if (difficulty == 1)
-        {
-            move = aiMove1();
-        }
+        if (difficulty == 0) move = aiMove0();
+        if (difficulty == 1) move = aiMove1();
 
         // Make the move
         grid[move] = currentPlayer;
@@ -162,9 +153,7 @@ public:
             // Found dangerous/winning combo
             if (sum == dangerousSum || sum == winningSum)
             {
-                log("[AI] Blocking/Winning move.");
-
-                // Find the empty spot to block this dangerous combo
+                // Find the empty spot
                 for (int loc : combo)
                 {
                     if (grid[loc] == NO_CELL)
@@ -178,8 +167,16 @@ public:
         }
 
         // Winning move first, then blocking move
-        if (winningMove != -1) return winningMove;
-        if (blockingMove != -1) return blockingMove;
+        if (winningMove != -1)
+        {
+            log("[AI] Winning move.");
+            return winningMove;
+        }
+        if (blockingMove != -1)
+        {
+            log("[AI] Blocking move.");
+            return blockingMove;
+        }
 
         // No dangerous combo found
         return aiMove0();
