@@ -104,7 +104,7 @@ public:
             }
         }
 
-        // Draw boarder lines
+        // Draw boarder lines (https://developer.gnome.org/gtkmm-tutorial/stable/sec-cairo-drawing-lines.html.en)
         {
             // Calculate values
             val fullWidth = gFullCellLen * rows;
@@ -184,6 +184,7 @@ public:
     MyRenderer renderer;
     Label lStatus;
     Button bNewGame;
+    Button bNewGameAI;
 
     /**
      * Constructor
@@ -191,7 +192,8 @@ public:
     MyWindow(): box(Orientation::VERTICAL, 10),
                 // Update window when game updates (Lambda: https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp)
                 renderer(&game, [this](){ updateStats(); }),
-                bNewGame("New Game vs Player")
+                bNewGame("New Game vs Player"),
+                bNewGameAI("New Game vs \"Ponkotsu AI\"")
     {
         // Window
         set_title("GUI");
@@ -199,14 +201,17 @@ public:
 
         // Layout container box
         set_child(box);
+        box.set_margin(20);
 
         // Add Components
         box.append(renderer);
         box.append(lStatus);
         box.append(bNewGame);
+        box.append(bNewGameAI);
 
         // Register events
         bNewGame.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::onClickNewGame)));
+        bNewGameAI.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::onClickNewGameAI)));
 
         updateStats();
     }
@@ -218,6 +223,16 @@ public:
     void onClickNewGame()
     {
         game = GameState();
+        renderer.queue_draw();
+        updateStats();
+    }
+
+    /**
+     * Called when new game AI button is clicked
+     */
+    void onClickNewGameAI()
+    {
+        game = GameState(true);
         renderer.queue_draw();
         updateStats();
     }
