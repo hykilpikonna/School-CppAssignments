@@ -212,6 +212,9 @@ public:
         box.append(bNewGameAI);
         box.append(lAiDifficulty);
         box.append(sAiDifficulty);
+        sAiDifficulty.set_range(0, 2);
+        sAiDifficulty.set_round_digits(0);
+        sAiDifficulty.set_increments(1, 1);
 
         // Register events
         bNewGame.signal_clicked().connect(sigc::bind(sigc::mem_fun(*this, &MyWindow::onClickNewGame)));
