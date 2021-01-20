@@ -11,7 +11,7 @@
 #include "gtkmm.h"
 #include "macros.h"
 #include "constants.h"
-#include "GameState.h"
+#include "game.h"
 
 #define CContext const Cairo::RefPtr<Cairo::Context>&
 

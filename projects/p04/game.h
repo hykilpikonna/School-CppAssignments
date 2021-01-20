@@ -2,8 +2,8 @@
 // Created by Hykilpikonna on 1/18/21.
 //
 
-#ifndef SCHOOL_CPP_GAMESTATE_H
-#define SCHOOL_CPP_GAMESTATE_H
+#ifndef SCHOOL_CPP_GAME_H
+#define SCHOOL_CPP_GAME_H
 
 #include "constants.h"
 #include "macros.h"
@@ -235,4 +235,4 @@ public:
     }
 };
 
-#endif //SCHOOL_CPP_GAMESTATE_H
+#endif //SCHOOL_CPP_GAME_H

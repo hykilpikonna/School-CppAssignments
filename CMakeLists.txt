@@ -22,7 +22,7 @@ LINK_DIRECTORIES(${GTK_LIBRARY_DIRS})
 # Add other flags to the compiler
 ADD_DEFINITIONS(${GTK_CFLAGS_OTHER})
 
-add_executable(p04 projects/p04/main.cpp projects/p04/gui.h projects/p04/GameState.h projects/p04/constants.h projects/p04/utils.h)
+add_executable(p04 projects/p04/main.cpp projects/p04/gui.h projects/p04/game.h projects/p04/constants.h projects/p04/utils.h)
 TARGET_LINK_LIBRARIES(p04 ${GTK_LIBRARIES})
 
 add_executable(homeworks homeworks/b018-random-toss.cpp)
