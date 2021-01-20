@@ -243,7 +243,7 @@ public:
         // Show dialog to let the player choose who goes first
         // https://developer.gnome.org/gtkmm-tutorial/stable/sec-dialogs-messagedialog.html.en
         dialog = std::make_unique<MessageDialog>(*this, "Who goes first?", false, MessageType::QUESTION, ButtonsType::NONE, true);
-        dialog->set_secondary_text("And this is the secondary text that explains things.");
+        dialog->set_secondary_text("Note: You probably can't win against Lv >1 AIs if you don't go first.");
         dialog->add_button("Me", 0);
         dialog->add_button("AI", 1);
         dialog->signal_response().connect(sigc::bind(mem_fun(*this, &MyWindow::_onClickNewGameAI)));
